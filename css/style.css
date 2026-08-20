@@ -1,0 +1,1474 @@
+/* ==========================================================================
+   Wonffein — hoja de estilos base
+   Paleta y tipografía definidas acá se reutilizan en todas las secciones
+   que se vayan agregando después (bio, galería, precios, términos, faq, contacto).
+   ========================================================================== */
+
+:root {
+  /* paleta (inspirada en el arte real de Won: fondo oscuro violeta,
+     rosa/fucsia del choker y los corazones, violeta-azul de los ojos,
+     dorado de los broches del pelo) */
+  --bg: #140b1a;
+  --bg-soft: #1f1229;
+  --surface: #2a1638;
+  --primary: #ff4fa8;
+  --primary-dark: #d6317f;
+  --secondary: #7c4dff;
+  --secondary-dark: #5a2fd6;
+  --accent: #ffcb6b;
+  --text: #f7eefc;
+  --text-muted: #b9a4cf;
+  --border: rgba(255, 255, 255, 0.14);
+
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  --font-display: "Baloo 2", system-ui, sans-serif;
+  --font-body: "Quicksand", system-ui, sans-serif;
+}
+
+/* reset mínimo */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; }
+
+.container { width: min(1100px, 92%); margin-inline: auto; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* animaciones de entrada, listas para usarse en futuras secciones
+   (agregar class="reveal" a cualquier bloque nuevo) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto !important; }
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  background: rgba(20, 11, 26, 0.75);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.wordmark {
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: .02em;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ==========================================================================
+   Slots de redes sociales
+   Íconos SVG (Twitch/X/Discord/Bluesky/Instagram de Simple Icons, VGen de un
+   pack aparte) pegados inline en el HTML y coloreados vía fill: currentColor
+   para calzar con la paleta del sitio — todos, incluido VGen, ya que el
+   archivo que se está usando para VGen es un ícono suelto, no el kit de marca
+   oficial con su verde fijo (ver Registro de Proyectos Activos si se cambia
+   por el oficial más adelante). La clase .social-slot--pending queda
+   disponible por si se agrega alguna red nueva sin ícono todavía.
+   ========================================================================== */
+
+.social-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.social-slot__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: transform .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.social-slot__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  display: block;
+}
+
+.social-slot[data-platform="vgen"] .social-slot__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.social-slot--pending .social-slot__icon {
+  border-style: dashed;
+}
+
+.social-slot__fallback {
+  font-family: var(--font-display);
+  font-size: .7rem;
+  color: var(--text-muted);
+}
+
+.social-slot:hover .social-slot__icon {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.social-slot--small .social-slot__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+}
+
+.social-slot--small .social-slot__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.social-slot--small[data-platform="vgen"] .social-slot__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 100px;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-display);
+  color: var(--accent);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .85rem;
+  margin: 0 0 10px;
+}
+
+/* "Fuego morado" del título del hero — prototipo a pedido de Nezash,
+   inspirado en el lore de demonio de Won. Deliberadamente barato en
+   rendimiento: solo anima background-position (gradiente de texto) y
+   filter (glow), sobre UN elemento de texto chico — nada de blur/turbulence
+   de SVG ni canvas/WebGL. Ver nota de rendimiento en el registro del
+   proyecto. Respeta prefers-reduced-motion (ver media query más abajo). */
+.hero__title {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  line-height: 1;
+  margin: 0 0 18px;
+  background: linear-gradient(180deg, #ffcb6b 0%, #ff4fa8 35%, #7c4dff 70%, #ff4fa8 100%);
+  background-size: 100% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 14px rgba(124, 77, 255, .55)) drop-shadow(0 0 30px rgba(255, 79, 168, .3));
+  animation: demon-flame 5s ease-in-out infinite, demon-glow 2.4s ease-in-out infinite;
+}
+
+@keyframes demon-flame {
+  0%, 100% { background-position: 50% 0%; }
+  50% { background-position: 50% 100%; }
+}
+
+@keyframes demon-glow {
+  0%, 100% { filter: drop-shadow(0 0 14px rgba(124, 77, 255, .55)) drop-shadow(0 0 30px rgba(255, 79, 168, .3)); }
+  50% { filter: drop-shadow(0 0 20px rgba(124, 77, 255, .75)) drop-shadow(0 0 42px rgba(255, 79, 168, .45)); }
+}
+
+.hero__tagline {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 46ch;
+  margin: 0 0 32px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(214, 49, 127, 0.22);
+}
+.btn--primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(214, 49, 127, 0.3); }
+
+.btn--ghost { border: 1.5px solid var(--border); color: var(--text); }
+.btn--ghost:hover { border-color: var(--primary); transform: translateY(-3px); }
+
+.hero__art {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__avatar {
+  width: min(420px, 90%);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 1.5px var(--border), 0 30px 60px rgba(0, 0, 0, 0.55);
+  animation: floaty 6s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+
+/* Espacio reservado para el arte del Hero (todavía sin definir qué pieza va
+   acá) — mismo tamaño/posición/flotación que .hero__avatar, solo cambia el
+   relleno visual por el aviso punteado. */
+.hero__avatar--placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--bg-soft);
+  border: 1.5px dashed var(--border);
+  box-shadow: none;
+}
+
+.hero__avatar-icon { font-size: 3.4rem; }
+.hero__avatar-note { font-size: .85rem; color: var(--accent); text-align: center; padding: 0 20px; }
+
+/* acentos decorativos (dibujados en CSS, no son arte de Won —
+   solo un detalle visual mientras no haya más piezas propias) */
+.hero__art::before,
+.hero__art::after {
+  content: "✦";
+  position: absolute;
+  color: var(--accent);
+  font-size: 1.6rem;
+  z-index: 3;
+  animation: spin-float 9s ease-in-out infinite;
+}
+.hero__art::before { top: 4%; right: 6%; }
+.hero__art::after { bottom: 8%; left: 4%; font-size: 1.1rem; animation-delay: 1.5s; opacity: .8; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes spin-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(15deg); }
+}
+
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .55;
+  z-index: 1;
+}
+.hero__blob--one { width: 420px; height: 420px; background: var(--secondary); top: -120px; left: -100px; }
+.hero__blob--two { width: 380px; height: 380px; background: var(--primary); bottom: -140px; right: -80px; }
+
+/* ==========================================================================
+   Decoración ambiental reutilizable (fondo + cards) — NO es arte de Won,
+   son formas/partículas dibujadas en CSS, mismo recurso que ya se usaba en
+   el Hero (.hero__blob, los brillitos ✦) pero generalizado para poder
+   ponerlo en cualquier sección que se sienta vacía. A propósito discreto:
+   opacidad baja, sin animación en los blobs (son estáticos) y las
+   partículas de .embers solo animan transform/opacity (barato). Todo esto
+   se apaga solo con prefers-reduced-motion (la regla global ya existente
+   al principio del archivo cubre las animaciones; acá además se oculta
+   .embers entero para no dejar puntos sueltos sin movimiento).
+   ========================================================================== */
+
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .16;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-blob--pink { background: var(--primary); }
+.ambient-blob--violet { background: var(--secondary); }
+
+.ambient-blob--tl { width: 300px; height: 300px; top: -90px;  left: -70px; }
+.ambient-blob--tr { width: 280px; height: 280px; top: -80px;  right: -60px; }
+.ambient-blob--bl { width: 300px; height: 300px; bottom: -100px; left: -60px; }
+.ambient-blob--br { width: 320px; height: 320px; bottom: -110px; right: -70px; }
+
+.embers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ember {
+  position: absolute;
+  bottom: -16px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: ember-rise 15s ease-in infinite;
+}
+
+.ember:nth-child(1) { left: 8%;  background: var(--primary);   box-shadow: 0 0 8px 2px rgba(255, 79, 168, .7);  animation-duration: 13s;   animation-delay: 0s; }
+.ember:nth-child(2) { left: 26%; background: var(--secondary); box-shadow: 0 0 8px 2px rgba(124, 77, 255, .7);  animation-duration: 16.5s; animation-delay: 2.4s; }
+.ember:nth-child(3) { left: 48%; background: var(--accent);    box-shadow: 0 0 8px 2px rgba(255, 203, 107, .7); animation-duration: 12.5s; animation-delay: 5s; }
+.ember:nth-child(4) { left: 68%; background: var(--primary);   box-shadow: 0 0 8px 2px rgba(255, 79, 168, .7);  animation-duration: 15.5s; animation-delay: 1.2s; }
+.ember:nth-child(5) { left: 88%; background: var(--secondary); box-shadow: 0 0 8px 2px rgba(124, 77, 255, .7);  animation-duration: 14s;   animation-delay: 3.6s; }
+
+@keyframes ember-rise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: .5; }
+  50%  { transform: translateY(-46%) translateX(10px); }
+  90%  { opacity: .3; }
+  100% { transform: translateY(-96%) translateX(-8px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .embers { display: none; }
+}
+
+@media (max-width: 860px) {
+  .hero__inner { grid-template-columns: 1fr; text-align: center; }
+  .hero__actions { justify-content: center; }
+  .hero__art { order: -1; margin-bottom: 20px; }
+  .hero__tagline { margin-inline: auto; }
+}
+
+/* ==========================================================================
+   About / Bio
+   ========================================================================== */
+
+.section-eyebrow {
+  font-family: var(--font-display);
+  color: var(--accent);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .85rem;
+  margin: 0 0 10px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0 0 24px;
+}
+
+.about {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Los decorativos (.ambient-blob, .embers) son position:absolute con
+   z-index:0 dentro de cada sección — sin esto, al ser elementos
+   posicionados quedarían SIEMPRE por encima del contenido normal del
+   .container (que no está posicionado), sin importar el orden en el HTML.
+   Se sube el propio .container a z-index:1 en cada sección que tiene
+   decoración para que el contenido real quede siempre arriba. */
+.about > .container,
+.gallery > .container,
+.stream-status > .container,
+.terms > .container,
+.faq > .container,
+.contact > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Card contenedora completa: envuelve todo el panel de pestañas (en vez de
+   dejarlo suelto en la sección) con su propio fondo, borde, sombra y un
+   glow decorativo. Hover con leve elevación para que se sienta "card". */
+.fact-card-shell {
+  position: relative;
+  margin: 44px 0 0;
+  padding: 32px;
+  border-radius: 32px;
+  background:
+    linear-gradient(160deg, rgba(124, 77, 255, 0.14), rgba(255, 79, 168, 0.08)),
+    var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.fact-card-shell:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 76px rgba(0, 0, 0, 0.5), 0 0 46px rgba(255, 79, 168, 0.16);
+}
+
+.fact-card-shell__glow {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  top: -110px;
+  right: -80px;
+  background: var(--secondary);
+  filter: blur(90px);
+  opacity: .35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fact-card-shell__hint {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: .85rem;
+  letter-spacing: .04em;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* Panel de pestañas: lista de pestañas (flex-column — agregar una más solo
+   suma otra fila) a la izquierda, imagen + texto a la derecha. Al cambiar de
+   pestaña, el contenido anterior "desaparece" (summon-out) y el nuevo
+   "aparece" (summon-in); el swap real de display ocurre a mitad de camino,
+   coordinado desde main.js. */
+.fact-panel {
+  position: relative;
+  z-index: 1;
+  margin: 22px 0 0;
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  gap: 24px;
+  /* stretch (el default de grid): el cuadro de la derecha toma SIEMPRE la
+     misma altura que la columna de pestañas — del primer botón al último —
+     sin importar cuál pestaña esté activa. */
+  align-items: stretch;
+}
+
+.fact-panel__tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fact-tab {
+  text-align: left;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.fact-tab:hover:not(.is-active) { background: rgba(255, 255, 255, 0.06); color: var(--text); }
+
+.fact-tab.is-active {
+  background: linear-gradient(135deg, var(--secondary-dark), var(--primary-dark));
+  color: #fff;
+  border-color: transparent;
+  transform: translateX(4px);
+  box-shadow: 0 8px 20px rgba(124, 77, 255, 0.28);
+}
+
+.fact-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.fact-panel__stage {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  min-height: 340px; /* respaldo para mobile, donde no hay columna de pestañas al lado que estirar */
+}
+
+/* Los 6 contenidos se apilan unos sobre otros (position:absolute) dentro del
+   mismo cuadro, así el tamaño del cuadro lo define SOLO .fact-panel__stage
+   (estirado para igualar a las pestañas) y nunca el contenido de turno —
+   cambiar de pestaña ya no cambia el tamaño de la caja. */
+.fact-content {
+  position: absolute;
+  inset: 24px;
+  display: none;
+  grid-template-rows: 220px 1fr;
+  gap: 20px;
+}
+.fact-content.is-active { display: grid; animation: summon-in .35s ease both; }
+.fact-content.is-leaving { display: grid; animation: summon-out .25s ease both; }
+
+.fact-content__art {
+  height: 220px;
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fact-content__art img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; }
+
+.fact-content__art--placeholder { flex-direction: column; gap: 8px; border-style: dashed; }
+.fact-content__art-icon { font-size: 2.6rem; }
+.fact-content__art-note { font-size: .8rem; color: var(--accent); }
+
+.fact-content__text { margin: 0; color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; }
+
+@keyframes summon-out {
+  from { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+  to   { opacity: 0; transform: scale(.94) translateY(6px); filter: blur(8px); }
+}
+
+@keyframes summon-in {
+  from { opacity: 0; transform: scale(.94) translateY(6px); filter: blur(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+@media (max-width: 760px) {
+  .fact-panel { grid-template-columns: 1fr; }
+
+  /* En mobile las pestañas ya no están al lado (van arriba), así que el
+     cuadro no tiene de quién heredar la altura por stretch — le damos una
+     altura fija propia, suficiente para el texto más largo (Games). */
+  .fact-panel__stage { min-height: 460px; }
+  .fact-content { grid-template-rows: 170px 1fr; }
+  .fact-content__art { height: 170px; }
+}
+
+/* Card del horario real: mismo lenguaje visual que fact-card-shell (glow,
+   gradiente, sombra) para que se sienta integrada al resto del sitio, pero
+   con ancho propio (no ocupa todo el container) porque es una ficha de
+   datos chica, no un panel grande. */
+.schedule {
+  padding: 90px 0;
+}
+
+.schedule-card {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(160deg, rgba(124, 77, 255, 0.14), rgba(255, 79, 168, 0.08)),
+    var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.schedule-card::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  top: -100px;
+  left: -70px;
+  background: var(--primary);
+  filter: blur(90px);
+  opacity: .25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.schedule-card .section-eyebrow {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.schedule-card__table-wrap {
+  position: relative;
+  z-index: 1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.schedule-table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: separate;
+  border-spacing: 8px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 14px 8px;
+  text-align: center;
+  font-size: .95rem;
+  border-radius: var(--radius-sm);
+}
+
+.schedule-table thead th {
+  background: var(--bg);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: 999px;
+  padding-block: 10px;
+}
+
+.schedule-table tbody th {
+  background: var(--bg);
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .88rem;
+  white-space: nowrap;
+}
+
+.schedule-table tbody td {
+  background: var(--bg-soft);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  font-size: .86rem;
+  border: 1px solid transparent;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+/* Brillo solo en el cuadro puntual que se está mirando (hover por celda),
+   no en toda la franja horaria — pasar el mouse por "4pm" ya no ilumina
+   Lunes a Viernes enteros, solo la celda bajo el cursor. */
+.schedule-table tbody td:not(.schedule-table__cell--special):hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary), 0 6px 16px rgba(255, 79, 168, 0.28);
+  transform: translateY(-2px);
+}
+
+.schedule-table__cell--special {
+  background: linear-gradient(135deg, var(--secondary-dark), var(--primary-dark));
+  color: #fff;
+}
+
+.schedule-table__cell--special:hover {
+  transform: translateY(-2px);
+}
+
+.schedule-card__link {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: fit-content;
+  margin: 22px auto 0;
+  color: var(--text-muted);
+  font-size: .9rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-align: center;
+}
+
+.schedule-card__link:hover { color: var(--text); }
+
+/* El horario tiene 6 columnas (hora + 5 días): en vez de dejarlo scrollable
+   y que se sienta cortado contra el borde de la card, se achica todo
+   (padding, tipografía, separación) para que entre completo sin scroll. */
+@media (max-width: 760px) {
+  .schedule-card { padding: 22px 14px; }
+  .schedule-table { min-width: 0; border-spacing: 3px; }
+  .schedule-table th,
+  .schedule-table td { padding: 7px 2px; font-size: .62rem; border-radius: 8px; }
+  .schedule-table tbody th { font-size: .6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fact-content.is-active,
+  .fact-content.is-leaving,
+  .fact-tab { animation: none !important; transition: none !important; }
+}
+
+/* ==========================================================================
+   Precios de comisiones (datos reales de VGen). Mismo criterio "grid y
+   listo" que la galería: agregar un servicio nuevo es sumar un <li>, el
+   grid (auto-fill/minmax) se reacomoda solo.
+   ========================================================================== */
+
+.pricing {
+  padding: 90px 0;
+}
+
+.pricing__intro {
+  max-width: 62ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.pricing-grid {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(160deg, rgba(124, 77, 255, 0.12), rgba(255, 79, 168, 0.06)),
+    var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.4);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.48);
+}
+
+.pricing-card__art {
+  height: 140px;
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.pricing-card__art--placeholder { flex-direction: column; gap: 6px; border-style: dashed; }
+.pricing-card__art-icon { font-size: 2.2rem; }
+.pricing-card__art-note { font-size: .75rem; color: var(--accent); }
+
+.pricing-card__category {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--text-muted);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.pricing-card__title { margin: 2px 0 10px; font-size: 1.4rem; }
+
+.pricing-card__price {
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+.pricing-card__price strong { color: var(--accent); font-size: 1.3rem; }
+
+.pricing-card__section { margin-bottom: 16px; }
+
+.pricing-card__label {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .82rem;
+  color: var(--text);
+}
+
+.pricing-card__list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-muted);
+  font-size: .88rem;
+  line-height: 1.55;
+}
+
+.pricing-card__list--muted { opacity: .82; font-size: .84rem; }
+
+/* Nota + botón de cada card van pegados abajo del todo (margin-top: auto),
+   así las 3 cards quedan alineadas al piso aunque tengan distinto largo de
+   texto arriba (align-items: stretch en .pricing-grid ya iguala el alto). */
+.pricing-card__footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.pricing-card__note {
+  margin: 0;
+  font-size: .8rem;
+  color: var(--accent);
+}
+
+.pricing-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .85rem;
+  transition: border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.pricing-card__link:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.pricing__legend {
+  margin: 34px 0 0;
+  max-width: 72ch;
+  color: var(--text-muted);
+  font-size: .92rem;
+}
+
+.pricing__legend a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.pricing__legend a:hover { color: var(--accent); }
+
+.pricing__cta { margin-top: 22px; }
+
+/* ==========================================================================
+   Términos de comisión — accordion (composición propia, distinta a los
+   tabs de About y a las cards de Precios). Expandir/cerrar anima la altura
+   de la fila de grid (0fr -> 1fr) en vez de max-height, para no depender
+   de un valor fijo en px que se rompa si el texto cambia.
+   ========================================================================== */
+
+.terms {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.terms__intro {
+  max-width: 62ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.terms-accordion {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 820px;
+}
+
+.terms-item {
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color .2s ease;
+}
+
+.terms-item:has(.terms-item__trigger[aria-expanded="true"]) { border-color: var(--primary); }
+
+.terms-item__heading { margin: 0; }
+
+.terms-item__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--text);
+  text-align: left;
+}
+
+.terms-item__trigger:hover { color: var(--primary); }
+.terms-item__trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.terms-item__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+}
+
+.terms-item__icon::before,
+.terms-item__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+}
+.terms-item__icon::before { width: 14px; height: 2px; }
+.terms-item__icon::after { width: 2px; height: 14px; transition: transform .25s ease; }
+
+.terms-item__trigger[aria-expanded="true"] .terms-item__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+
+.terms-item__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .35s ease;
+}
+
+.terms-item__panel.is-open { grid-template-rows: 1fr; }
+
+.terms-item__panel-inner { overflow: hidden; }
+
+.terms-item__panel-inner ul {
+  margin: 0;
+  padding: 0 22px 20px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.terms-item__panel-inner li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--text-muted);
+  font-size: .92rem;
+  line-height: 1.6;
+}
+
+.terms-item__panel-inner li::before {
+  content: "♦";
+  position: absolute;
+  left: 0;
+  top: .35em;
+  color: var(--accent);
+  font-size: .7rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card,
+  .pricing-card__link,
+  .terms-item,
+  .terms-item__panel,
+  .terms-item__icon::after { transition: none !important; }
+}
+
+/* ==========================================================================
+   Gallery
+   ========================================================================== */
+
+.gallery {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0;
+}
+
+.gallery__intro {
+  max-width: 56ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+/* auto-fill/minmax: agregar una pieza de arte más es sumar un <li> — el
+   grid se reacomoda solo, no hay que tocar el CSS. */
+.gallery-grid {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.gallery-item__trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.gallery-item__trigger img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+/* El caption de cada pieza queda solo para el lightbox y lectores de
+   pantalla (.visually-hidden en el HTML) — en el grid se ve solo la imagen,
+   bien encuadrada, sin texto encima. */
+
+.gallery-item__trigger:hover,
+.gallery-item__trigger:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.45);
+  border-color: var(--primary);
+}
+
+.gallery-item__trigger:hover img,
+.gallery-item__trigger:focus-visible img { transform: scale(1.08); }
+
+.gallery-item__trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Stream status (embed de Twitch — resuelve "en vivo o no" solo, sin lógica
+   propia: si está offline, el embed de Twitch ya muestra esa pantalla)
+   ========================================================================== */
+
+.stream-status {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.stream-status__intro {
+  max-width: 56ch;
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.stream-status__embed {
+  margin: 36px auto 0;
+  max-width: 720px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-soft); /* evita un flash blanco mientras carga el iframe de Twitch */
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.stream-status__embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.stream-status__cta { margin-top: 28px; }
+
+/* ==========================================================================
+   Lightbox
+   ========================================================================== */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.lightbox.is-open { display: flex; }
+
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 6, 14, 0.86);
+  backdrop-filter: blur(6px);
+  border: none;
+  cursor: pointer;
+}
+
+.lightbox__content {
+  position: relative;
+  z-index: 1;
+  max-width: min(640px, 92vw);
+  max-height: 88vh;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  animation: summon-in .3s ease both;
+}
+
+.lightbox__image {
+  max-width: 100%;
+  max-height: 68vh;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+}
+
+.lightbox__caption {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  text-align: center;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.lightbox__close:hover { border-color: var(--primary); color: var(--primary); }
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox__nav:hover { border-color: var(--primary); color: var(--primary); }
+.lightbox__nav--prev { left: -18px; }
+.lightbox__nav--next { right: -18px; }
+
+@media (max-width: 560px) {
+  .lightbox__content { padding: 16px; }
+  .lightbox__nav { width: 36px; height: 36px; font-size: 1.2rem; }
+  .lightbox__nav--prev { left: -8px; }
+  .lightbox__nav--next { right: -8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox__content { animation: none; }
+  .gallery-item__trigger,
+  .gallery-item__trigger img,
+  .gallery-item__caption { transition: none; }
+}
+
+/* ==========================================================================
+   FAQ — mismo patrón de accordion que Términos (trigger + panel que anima
+   grid-template-rows), pero en grid de 2 columnas en vez de lista de un
+   ancho fijo, para que la sección tenga su propia composición.
+   ========================================================================== */
+
+.faq {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0;
+}
+
+.faq__intro {
+  max-width: 62ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.faq__intro a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.faq__intro a:hover { color: var(--accent); }
+
+.faq-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.faq-item {
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color .2s ease;
+}
+
+.faq-item:has(.faq-item__trigger[aria-expanded="true"]) { border-color: var(--primary); }
+
+.faq-item__heading { margin: 0; }
+
+.faq-item__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .96rem;
+  color: var(--text);
+  text-align: left;
+}
+
+.faq-item__trigger:hover { color: var(--primary); }
+.faq-item__trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.faq-item__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+}
+
+.faq-item__icon::before,
+.faq-item__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+}
+.faq-item__icon::before { width: 13px; height: 2px; }
+.faq-item__icon::after { width: 2px; height: 13px; transition: transform .25s ease; }
+
+.faq-item__trigger[aria-expanded="true"] .faq-item__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+
+.faq-item__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .35s ease;
+}
+
+.faq-item__panel.is-open { grid-template-rows: 1fr; }
+
+.faq-item__panel-inner { overflow: hidden; }
+
+.faq-item__panel-inner p {
+  margin: 0;
+  padding: 0 20px 18px;
+  color: var(--text-muted);
+  font-size: .92rem;
+  line-height: 1.6;
+}
+
+.faq-item__panel-inner a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.faq-item__panel-inner a:hover { color: var(--accent); }
+
+/* ==========================================================================
+   Contacto — sin formulario propio (no hay backend): 2 caminos reales,
+   VGen para encargar y Discord para preguntar antes. El handle de Discord
+   se copia con un click en vez de ser solo texto (ver copyToClipboard en
+   main.js).
+   ========================================================================== */
+
+.contact {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0 120px;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--border);
+}
+
+.contact__intro {
+  max-width: 62ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.contact-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 760px;
+}
+
+.contact-card {
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(160deg, rgba(124, 77, 255, 0.12), rgba(255, 79, 168, 0.06)),
+    var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.contact-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+.contact-card__title { margin: 0 0 10px; font-size: 1.2rem; }
+
+.contact-card__text {
+  margin: 0 0 22px;
+  color: var(--text-muted);
+  font-size: .92rem;
+  line-height: 1.55;
+}
+
+.contact-card__action { width: 100%; }
+
+.contact-card__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: none;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.contact-card__copy:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
+.contact-card__copy.is-copied { border-color: var(--accent); color: var(--accent); }
+
+.contact-card__copy-icon { font-size: 1.05rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item,
+  .faq-item__panel,
+  .faq-item__icon::after,
+  .contact-card__copy { transition: none !important; }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+  margin-top: 40px;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-size: .9rem;
+}
