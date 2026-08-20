@@ -82,8 +82,8 @@
 
       <div class="hero__art">
         <div class="hero__avatar hero__avatar--placeholder" aria-hidden="true">
-          <img src="assets/imgEjem/hero.png" alt="Close-up illustration of Won with a surprised, sparkly expression" loading="lazy">
-
+          <span class="hero__avatar-icon">🖼️</span>
+          <span class="hero__avatar-note">[EDITAR: art pendiente]</span>
         </div>
       </div>
     </div>
@@ -246,10 +246,12 @@
     videos automáticamente) — no hace falta lógica propia para eso.
 
     IMPORTANTE al desplegar: el parámetro `parent` tiene que coincidir con el
-    dominio real donde viva la página (ej. parent=wonffein.github.io o
-    parent=www.wonffein.com), si no Twitch bloquea el embed. Se puede repetir
-    `&parent=` con varios dominios (por ejemplo dominio real + un preview).
-    Por ahora queda "parent=localhost" para poder probarlo en este entorno.
+    dominio real donde viva la página. Ya está publicada en GitHub Pages en
+    https://nezash.github.io/WonffeinPage/ — el parent es solo el hostname
+    (nezash.github.io), sin el "https://" ni el "/WonffeinPage/". Se deja
+    también "parent=localhost" para poder seguir probando cambios en este
+    entorno sin que se rompa el embed. Si algún día se pasa a un dominio
+    propio (ej. wonffein.com), hay que sumar un tercer `&parent=` con ese.
   -->
   <section id="stream" class="stream-status reveal">
     <div class="ambient-blob ambient-blob--tl ambient-blob--pink" aria-hidden="true"></div>
@@ -261,7 +263,7 @@
 
       <div class="stream-status__embed">
         <iframe
-          src="https://player.twitch.tv/?channel=wonffein&parent=localhost&muted=true"
+          src="https://player.twitch.tv/?channel=wonffein&parent=nezash.github.io&parent=localhost&muted=true"
           allowfullscreen
           title="Wonffein's Twitch stream"
         ></iframe>
