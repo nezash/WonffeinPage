@@ -1,0 +1,44 @@
+/* Estructura común de cada sección: franja de fondo, etiqueta chica, título y texto de apoyo. */
+
+.section {
+  padding: 84px 0;
+}
+
+.section--white {
+  background: var(--bg);
+}
+
+.section--tint {
+  background: var(--bg-tint);
+}
+
+.section--lilac {
+  background: var(--bg-lilac);
+}
+
+.section-eyebrow {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lilac-dark);
+}
+
+.section-title {
+  font-size: clamp(32px, 5vw, 46px);
+}
+
+.section-intro {
+  margin-top: 12px;
+  max-width: 640px;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding: 60px 0;
+  }
+}

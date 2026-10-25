@@ -1,0 +1,13 @@
+/* Aparición suave de las secciones al hacer scroll (class="reveal"; js/reveal.js agrega is-visible).
+   Si el navegador no tiene JS, el contenido se ve igual (solo se oculta cuando <html> tiene .js). */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}

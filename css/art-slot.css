@@ -1,0 +1,91 @@
+/* ==========================================================================
+   Espacio para un dibujo. Dos estados:
+   - .art-slot--pending: dibujo que todavía no llega (caja punteada con el
+     número del plano). Para llenarlo: cambiar "pending" por "filled", borrar
+     el .art-slot__placeholder y poner un <img> adentro (ver README.md).
+   - .art-slot--filled: dibujo ya colocado.
+   La forma se controla con --ratio (ej. style="--ratio: 3 / 4").
+   ========================================================================== */
+
+.art-slot {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: var(--ratio, 1 / 1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.art-slot--pending {
+  border: 2px dashed var(--lilac);
+  background: var(--bg-lilac);
+}
+
+.art-slot__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  text-align: center;
+  color: var(--ink);
+}
+
+.art-slot__placeholder svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--lilac);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.art-slot__num {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.art-slot__label {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.art-slot__hint {
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--ink-soft);
+}
+
+.art-slot--filled {
+  background: var(--surface);
+}
+
+.art-slot--filled img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Variante sin caja, para stickers/emotes con fondo transparente */
+.art-slot--sticker {
+  background: none;
+  overflow: visible;
+}

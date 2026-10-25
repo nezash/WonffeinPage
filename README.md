@@ -1,43 +1,95 @@
 # Página de Won — plan del proyecto
 
-Página de presentación para Won (vtuber), con foco en mostrar su arte disponible y ofrecer sus comisiones. Sin arte generado por IA — solo piezas reales.
+Página de presentación para Won (vtuber), con foco en mostrar su arte y ofrecer sus comisiones de forma amigable (no "comercial"). Sin arte generado por IA — solo piezas reales.
 
 ## Stack
 
-HTML + CSS + JS plano. Sin build, sin framework, sin dependencias. Se descartó React + Vite: el sitio es mayormente contenido estático y el dueño del proyecto no tiene experiencia previa con React — un sitio bien hecho en HTML/CSS/JS se ve igual de profesional para este caso, con menos fricción para editar después.
+HTML + CSS + JS plano. Sin build, sin framework, sin dependencias. Abre `index.html` directo en el navegador.
 
-## Estructura de carpetas
+## Estructura
 
 ```
 Pagina Won Nueva/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── main.js
-├── assets/
-│   └── img/
-│       ├── avatar-wave.png    (arte principal / hero)
-│       ├── lurk-screen.png    (pantalla de "lurk" para stream, también sirve como pieza de galería)
-│       ├── banner-love.png    (banner grande, buen candidato para sección de galería o fondo decorativo)
-│       └── emote-sparkle.png  (emote, pieza de galería / detalle decorativo)
-└── README.md (este archivo)
+├── index.html            (solo estructura y textos)
+├── css/                  (un archivo por componente)
+│   ├── style.css         base: colores, tipografía, reset, utilidades
+│   ├── section.css       franjas de sección, títulos
+│   ├── button.css  chip.css  art-slot.css  social.css
+│   ├── header.css  hero.css  gallery.css  lightbox.css
+│   ├── services.css  recent-work.css  process.css
+│   ├── about.css  stream.css  schedule.css
+│   ├── accordion.css  faq.css  terms.css
+│   └── contact.css  footer.css  reveal.css
+├── js/                   (un archivo por función)
+│   ├── main.js           compartido: clase "js", año del footer, reduced-motion
+│   ├── reveal.js  nav-toggle.js  facts-tabs.js
+│   ├── gallery-filter.js  lightbox.js
+│   └── accordion.js  copy-handle.js
+├── assets/img/           dibujos de Won
+└── svg/                  íconos originales de redes (el HTML usa un sprite con los mismos trazos)
 ```
 
-## Secciones planeadas (una sola página, navegación por anclas)
+## Secciones (una sola página, navegación por anclas)
 
-1. **Hero** — nombre de Won, tagline, avatar-wave.png, links rápidos a redes.
-2. **Bio / redes / horario** — quién es Won, links a Twitch/Twitter/YouTube/Discord/etc, horario de streams.
-3. **Galería** — las 4 piezas de arte disponibles, pensada para poder agregar más piezas fácilmente después.
-4. **Precios de comisiones** — tabla de tipos de arte (ícono, busto, medio cuerpo, cuerpo completo, etc.) con precios. Placeholders hasta tener precios reales.
-5. **Términos de comisión** — reglas: qué dibuja / qué no, tiempos de entrega, pago, reembolsos.
-6. **FAQ** — preguntas frecuentes.
-7. **Contacto / cómo encargar** — instrucciones o formulario para pedir una comisión (a definir: mailto, Discord, o servicio de formularios tipo Formspree si se necesita que funcione sin backend).
+1. Hero — Won primero (`#inicio`)
+2. Galería con filtros (`#gallery`)
+3. Comisiones: 3 tarjetas con dibujo de ejemplo + tira "Made for lovely clients" (`#commissions`)
+4. Cómo funciona: 4 pasos (`#process`)
+5. Sobre Won + stream en vivo + horario (`#about`). El horario no tiene horas fijas: Won transmite casi a diario a horas distintas, así que se muestran los 7 días y un enlace al horario de Twitch
+6. Dudas frecuentes (`#faq`)
+7. Términos de servicio completos, en filas que se abren (`#terms`)
+8. Contacto (`#contact`)
 
-Todo el contenido real (nombre, tagline, redes, precios, términos) queda en placeholders `[EDITAR: ...]` hasta que Won confirme los datos.
+## Dibujos: cómo llenar un espacio pendiente
 
-## Estado
+Cada dibujo que falta es un `<figure class="art-slot art-slot--pending" data-slot="N">` con un número **N que coincide con el plano** (hoja "Dibujos que hay que pedir"). Para llenarlo:
 
-Carpeta y assets ya copiados. Falta construir el HTML/CSS/JS — se hace sección por sección, en el orden de arriba, avisando antes de generar cada una.
+1. Guardar la imagen en `assets/img/` (ej. `gallery-fullbody.png`).
+2. En ese `<figure>`: cambiar `art-slot--pending` por `art-slot--filled`, borrar el `<div class="art-slot__placeholder">…</div>` y poner `<img src="assets/img/gallery-fullbody.png" alt="descripción">`.
+3. Si está dentro de la galería y se quiere que se agrande al hacer clic: reemplazar el `<figure>` por el mismo `<button class="gallery-item__trigger">` que usan las piezas ya puestas (con su `<img>` y su `<span class="gallery-item__caption visually-hidden">`).
 
-Próximo paso: confirmar con qué sección empezar (recomendado: Hero + Bio, porque el resto de la página se apoya en esa estructura base — nav, header, footer, paleta de colores).
+### Estado de los dibujos
+
+| # | Dónde va | Estado |
+|---|----------|--------|
+| 1 | Hero, círculo grande | listo (`avatar-wave.png`) |
+| 2 | Hero, sticker flotante | listo (`emote-sparkle.png`) |
+| 3 | Galería y cierre de contacto | listo (`banner-love.png`) |
+| 4 | Galería | listo (`lurk-screen.png`) |
+| 5 | Galería: ilustración de cuerpo completo (vertical 3:4) | **pendiente** |
+| 6 | Galería: escena horizontal con fondo (16:9) | **pendiente** |
+| 7 | Galería: chibi de un OC (1:1) | **pendiente** |
+| 8 | Galería: retrato o busto con render (1:1) | **pendiente** |
+| 9 | Galería: boceto o WIP | **pendiente** |
+| 10 | Galería: hoja con varios emotes | **pendiente** |
+| 11 | Comisiones: ejemplo de Icon | listo |
+| 12 | Comisiones: ejemplo de Discord Stamp (PNG sin fondo) | listo |
+| 13 | Comisiones: ejemplo de Rendered | listo |
+| 14 (a–d) | Tira "Made for lovely clients": 4 comisiones recientes. Se llena desde `js/recent-work-data.js` (ver abajo) | **pendiente** |
+| 15–18 | Cómo funciona: 4 mini Wons (mensaje, lápiz, pintando, regalo) | **pendiente** (opcional) |
+| 19 | Sobre Won: Won dibujando con su tablet (4:5) | **pendiente** |
+| 20 | Dudas frecuentes: mini Won pensando | **pendiente** (opcional) |
+
+## Tira de comisiones recientes (#14)
+
+`js/recent-work.js` pone las piezas de `window.RECENT_WORK` (en `js/recent-work-data.js`) en los 4 espacios de la tira; la lista vacía deja los espacios pendientes.
+
+Esa lista **se genera sola**: `scripts/update-recent-work.py` pide a la API pública de VGen el portafolio de Won, toma las 4 comisiones más nuevas (campo `created`, sin advertencias de contenido), descarga sus imágenes a `assets/recent/` y reescribe `js/recent-work-data.js`. Si VGen falla, no toca nada.
+
+- A mano (con Python instalado): `python scripts/update-recent-work.py` y luego subir los cambios a git.
+- Automático: `.github/workflows/update-recent-work.yml` (copia lista en `scripts/update-recent-work.yml`: hay que moverla a `.github/workflows/`) lo corre en GitHub cada 6 horas y hace el commit. Primera vez: en GitHub, pestaña Actions → "Actualizar comisiones recientes" → Run workflow.
+- Si VGen cambia el formato de su API, hay que ajustar el script (las claves usadas son `showcases`, `commissionID`, `created`, `showcaseID`, `showcaseItems[].url`, `contentWarnings`).
+
+Las imágenes de las 3 comisiones de ejemplo (#11–13) son copias de 1000 px de `com_icon.jpg`, `discstamp_com.png` y `render_com.jpg` (los originales pesan 1–3 MB y se quedan en la carpeta sin usar): `commission-icon.jpg`, `commission-stamp.png`, `commission-rendered.jpg`.
+
+## Look
+
+- Ambiente oscuro: fondos morados profundos en todo el sitio y letras en lila claro (header y portada con degradado violeta). Todos los colores están en `:root` de `css/style.css`.
+- Letras de Google Fonts: **Gloock** (títulos, elegante y un poco dramática) y **Jost** (texto). Para probar otra, se cambia el `<link>` del `<head>` en `index.html` y `--font-display` en `style.css`.
+- El precio de cada servicio (`from $20`…) siempre va en la misma línea que el título: la tarjeta es un `container` y el título se encoge a su ancho.
+
+## Pendientes de contenido
+
+- Selector de idioma EN/ES (el sitio está en inglés).
+- Si se pasa a dominio propio: sumar otro `&parent=` en el embed de Twitch (`index.html`, sección `#stream`).
+- Las descripciones cortas de cada servicio ("A cute chibi for your avatar…") y los textos de "Cómo funciona" son redacción nueva; los precios, listas y términos son los reales de VGen.

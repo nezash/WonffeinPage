@@ -1,0 +1,52 @@
+/* Tarjetas "Is she live?" y "Come hang out" (horario), una al lado de la otra. */
+
+.live-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+}
+
+.live-card {
+  padding: 26px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.live-card__title {
+  margin: 14px 0 6px;
+  font-size: 30px;
+}
+
+.live-card__text {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.stream-embed {
+  position: relative;
+  margin-top: 16px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-lilac);
+}
+
+.stream-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.live-card__cta {
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .live-row {
+    grid-template-columns: 1fr;
+  }
+}

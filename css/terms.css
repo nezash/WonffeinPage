@@ -1,0 +1,12 @@
+/* Términos de comisión completos. Usa las filas de accordion.css; acá solo el ancho y el texto de apoyo. */
+
+.terms__list {
+  max-width: 820px;
+  margin-top: 34px;
+}
+
+.terms__updated {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}

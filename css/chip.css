@@ -1,0 +1,43 @@
+/* Chips: etiquetas chiquitas (precio, paso, categoría) y filtros/pestañas con forma de píldora. */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.chip--accent {
+  background: var(--bg-tint);
+  border-color: var(--accent-line);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Chips que son botones (filtros de galería, pestañas de About) */
+button.chip {
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+button.chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--lilac);
+}
+
+button.chip.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-ink);
+}

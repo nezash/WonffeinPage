@@ -1,0 +1,118 @@
+/* Visor para ver un dibujo en grande (se abre al hacer clic en una pieza de la galería).
+   El cuadro se ajusta al dibujo; la X y las flechas quedan FUERA del cuadro, nunca encima del dibujo. */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  /* espacio libre alrededor del cuadro para los botones: arriba la X, a los lados las flechas */
+  padding: 72px 84px 28px;
+}
+
+.lightbox.is-open {
+  display: flex;
+}
+
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgba(36, 20, 58, 0.88);
+  cursor: zoom-out;
+}
+
+.lightbox__content {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 18px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.lightbox__image {
+  max-width: 100%;
+  max-height: calc(100vh - 72px - 28px - 34px - 56px); /* alto de pantalla − márgenes − relleno − leyenda */
+  object-fit: contain;
+}
+
+.lightbox__caption {
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* La X: arriba, afuera del cuadro, alineada con su esquina derecha */
+.lightbox__close {
+  top: -58px;
+  right: 0;
+}
+
+/* Flechas: a los lados, afuera del cuadro */
+.lightbox__nav {
+  top: 50%;
+  margin-top: -23px;
+  font-size: 30px;
+}
+
+.lightbox__nav--prev {
+  left: -62px;
+}
+
+.lightbox__nav--next {
+  right: -62px;
+}
+
+/* Pantallas angostas: no hay lugar a los lados, así que las flechas van debajo del cuadro */
+@media (max-width: 700px) {
+  .lightbox {
+    padding: 72px 16px 84px;
+  }
+
+  .lightbox__image {
+    max-height: calc(100vh - 72px - 84px - 34px - 56px);
+  }
+
+  .lightbox__nav {
+    top: auto;
+    bottom: -66px;
+    margin-top: 0;
+  }
+
+  .lightbox__nav--prev {
+    left: calc(50% - 56px);
+  }
+
+  .lightbox__nav--next {
+    right: calc(50% - 56px);
+  }
+}

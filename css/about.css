@@ -1,0 +1,73 @@
+/* Sobre Won: su foto grande a un lado y la bio con pestañas pequeñas al otro. */
+
+.about__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+  align-items: center;
+  gap: 56px;
+}
+
+.about__tabs {
+  margin-top: 24px;
+}
+
+.about__stage {
+  position: relative;
+  margin-top: 22px;
+  min-height: 150px;
+  padding: 24px 26px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-lilac);
+}
+
+.fact-content {
+  display: none;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.fact-content.is-active {
+  display: block;
+  animation: summon-in 0.35s ease both;
+}
+
+.fact-content.is-leaving {
+  display: block;
+  animation: summon-out 0.25s ease both;
+}
+
+@keyframes summon-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes summon-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 900px) {
+  .about__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .about__art {
+    max-width: 380px;
+  }
+}

@@ -1,0 +1,26 @@
+/* Pie de página oscuro (más oscuro todavía que el resto). */
+
+.site-footer {
+  padding: 40px 0;
+  background: var(--night-deep);
+  color: var(--on-night);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 32px;
+}
+
+.footer-inner__brand {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.footer-inner__credit {
+  font-size: 14px;
+  color: #e4d9f3;
+}

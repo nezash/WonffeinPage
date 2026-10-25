@@ -1,0 +1,168 @@
+/* Comisiones: cada tarjeta empieza con un dibujo de ejemplo. El precio es una etiqueta chica, no el protagonista. */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 38px;
+  align-items: stretch;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  container-type: inline-size; /* el título se ajusta al ancho de SU tarjeta, no al de la pantalla */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.service-card .art-slot {
+  border-radius: var(--radius-md);
+}
+
+/* Título a la izquierda y precio a la derecha, SIEMPRE en la misma línea (nunca baja). */
+.service-card__head {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.service-card__head .chip {
+  flex: none;
+  white-space: nowrap;
+}
+
+.service-card__category {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lilac-dark);
+}
+
+.service-card__title {
+  min-width: 0;
+  font-size: clamp(20px, 8.2cqi, 28px);
+  white-space: nowrap;
+}
+
+.service-card__desc {
+  color: var(--ink-soft);
+}
+
+.service-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.service-card__list li {
+  position: relative;
+  padding-left: 24px;
+}
+
+.service-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-line);
+}
+
+/* "Extras & details": se abre solo si la persona quiere ver más */
+.service-card__more {
+  border-top: 2px dashed var(--line);
+  padding-top: 12px;
+  font-size: 15px;
+}
+
+.service-card__more summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--accent-text);
+  list-style: none;
+}
+
+.service-card__more summary::-webkit-details-marker {
+  display: none;
+}
+
+.service-card__more summary::after {
+  content: " +";
+}
+
+.service-card__more[open] summary::after {
+  content: " −";
+}
+
+.service-card__more-label {
+  margin: 14px 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.service-card__more .service-card__list {
+  color: var(--ink-soft);
+}
+
+.service-card__note {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.service-card .btn {
+  margin-top: auto; /* el botón siempre queda abajo, aunque una tarjeta tenga menos texto */
+}
+
+.service-card__note {
+  margin-top: auto;
+}
+
+.service-card__note + .btn {
+  margin-top: 4px;
+}
+
+.services-extras {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: 24px;
+  padding: 16px 24px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.services-extras strong {
+  color: var(--ink);
+}
+
+@media (max-width: 960px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin-inline: auto;
+  }
+}

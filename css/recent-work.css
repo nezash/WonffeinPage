@@ -1,0 +1,56 @@
+/* Tira "Made for lovely clients": 4 comisiones recientes (necesitan permiso de cada cliente). */
+
+.recent-work {
+  display: grid;
+  grid-template-columns: 240px repeat(4, minmax(0, 1fr));
+  align-items: center;
+  gap: 18px;
+  margin-top: 52px;
+  padding: 24px 28px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.recent-work__title {
+  font-size: 26px;
+}
+
+.recent-work__text {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.recent-work .art-slot {
+  border-radius: var(--radius-sm);
+}
+
+.recent-work .art-slot__placeholder svg,
+.recent-work .art-slot__hint {
+  display: none;
+}
+
+.recent-work__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.recent-work__link img {
+  transition: transform 0.25s ease;
+}
+
+.recent-work__link:hover img {
+  transform: scale(1.04);
+}
+
+@media (max-width: 960px) {
+  .recent-work {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recent-work__intro {
+    grid-column: 1 / -1;
+  }
+}

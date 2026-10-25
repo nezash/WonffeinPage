@@ -1,0 +1,71 @@
+/* Dudas frecuentes: preguntas a la izquierda; a la derecha una mini Won y "la versión corta" de las reglas. */
+
+.faq__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  align-items: start;
+  gap: 40px;
+  margin-top: 38px;
+}
+
+.faq__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq__aside .art-slot {
+  border-radius: var(--radius-lg);
+}
+
+.short-terms {
+  padding: 24px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.short-terms__title {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.short-terms__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+.short-terms__list li {
+  position: relative;
+  padding-left: 24px;
+}
+
+.short-terms__list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-line);
+}
+
+.short-terms__link {
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .faq__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .faq__aside {
+    max-width: 420px;
+  }
+}

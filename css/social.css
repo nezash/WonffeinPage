@@ -1,0 +1,46 @@
+/* Íconos de redes (usan el sprite SVG que está al inicio del HTML, así se recolorean con currentColor). */
+
+.social-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.social-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: var(--ink);
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.social-slot:hover {
+  transform: translateY(-3px);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.social-slot svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+/* En el footer (fondo oscuro) */
+.social-nav--footer .social-slot {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.social-nav--footer .social-slot:hover {
+  background: var(--on-night);
+  border-color: var(--on-night);
+  color: var(--night);
+}

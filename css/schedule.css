@@ -1,0 +1,52 @@
+/* Horario de streams: Won transmite casi a diario pero a horas distintas, así que se muestran los 7 días
+   y se manda al horario de Twitch para las horas exactas. */
+
+.day-pills {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 18px;
+}
+
+.day-pills li {
+  padding: 10px 0;
+  border: 1.5px solid var(--accent-line);
+  border-radius: 999px;
+  background: var(--bg-tint);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--accent-text);
+}
+
+.schedule__note {
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.schedule__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 18px;
+}
+
+.schedule__link {
+  font-weight: 700;
+}
+
+@media (max-width: 420px) {
+  .day-pills {
+    gap: 4px;
+  }
+
+  .day-pills li {
+    font-size: 13px;
+  }
+}
+
+#schedule {
+  align-self: start; /* la tarjeta del horario no se estira más que su contenido */
+}

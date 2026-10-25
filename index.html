@@ -5,475 +5,660 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wonffein</title>
 <meta name="description" content="Wonffein — Vtuber & digital artist. Art, commissions and socials.">
-<!-- Sitio principalmente en inglés. Selector de idioma (EN/ES) queda pendiente para más adelante. -->
+<!--
+  Sitio principalmente en inglés. Selector de idioma (EN/ES) queda pendiente.
+
+  REDISEÑO "amigable": fondo claro, el arte de Won primero y las comisiones después.
+  Cada dibujo que todavía no existe es un espacio .art-slot--pending con un NÚMERO que
+  coincide con el plano (hoja "Dibujos que hay que pedir"). Para llenar uno, mira README.md.
+-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Un CSS por componente -->
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/section.css">
+<link rel="stylesheet" href="css/button.css">
+<link rel="stylesheet" href="css/chip.css">
+<link rel="stylesheet" href="css/art-slot.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/social.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/hero-bg.css">
+<link rel="stylesheet" href="css/gallery.css">
+<link rel="stylesheet" href="css/lightbox.css">
+<link rel="stylesheet" href="css/services.css">
+<link rel="stylesheet" href="css/recent-work.css">
+<link rel="stylesheet" href="css/process.css">
+<link rel="stylesheet" href="css/about.css">
+<link rel="stylesheet" href="css/stream.css">
+<link rel="stylesheet" href="css/schedule.css">
+<link rel="stylesheet" href="css/accordion.css">
+<link rel="stylesheet" href="css/faq.css">
+<link rel="stylesheet" href="css/terms.css">
+<link rel="stylesheet" href="css/contact.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/reveal.css">
+
+<script src="js/main.js"></script>
 </head>
 <body>
+
+<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <symbol id="icon-twitch" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></symbol>
+  <symbol id="icon-vgen" viewBox="0 0 75 75"><g transform="translate(0,75) scale(0.1,-0.1)" fill="currentColor" stroke="none"><path d="M400 637 c-71 -23 -140 -120 -140 -197 0 -19 -4 -17 -32 18 -59 71 -111 89 -168 55 -34 -19 -50 -52 -50 -97 0 -73 186 -273 299 -321 47 -21 128 -18 179 5 55 25 152 117 203 193 46 70 51 120 18 182 -76 141 -189 200 -309 162z m148 -66 c50 -25 104 -102 104 -147 0 -43 -16 -68 -100 -154 -146 -148 -230 -146 -382 10 -90 91 -116 135 -96 165 28 43 52 32 149 -69 89 -91 127 -116 162 -102 12 4 8 15 -20 52 -41 53 -49 81 -42 134 14 105 127 161 225 111z"/><path d="M437 473 c-15 -15 -5 -63 19 -92 l26 -31 24 29 c29 34 31 62 6 84 -19 17 -63 23 -75 10z"/></g></symbol>
+  <symbol id="icon-instagram" viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
+  <symbol id="icon-x" viewBox="0 0 24 24"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></symbol>
+  <symbol id="icon-discord" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></symbol>
+  <symbol id="icon-bluesky" viewBox="0 0 24 24"><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="container header-inner">
     <a href="#inicio" class="wordmark">Wonffein</a>
 
-    <!--
-      Íconos de redes: SVG oficiales de cada marca (Simple Icons para Twitch/X/Discord/
-      Bluesky, asset oficial de VGen), guardados en /svg y pegados inline acá para poder
-      controlar su color por CSS (fill: currentColor) sin depender de imágenes sueltas.
-      El de VGen mantiene sus colores de marca tal cual (no se recolorea, así lo pide su
-      guía de marca). Instagram todavía no tiene SVG en la carpeta — se queda con el
-      placeholder (borde punteado + "IG") hasta que se agregue instagram.svg a /svg.
-    -->
-    <nav class="social-nav" aria-label="Wonffein's social links">
-      <a class="social-slot" data-platform="twitch" href="https://www.twitch.tv/wonffein" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitch</title><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg></span>
-        <span class="visually-hidden">Wonffein on Twitch</span>
-      </a>
-      <a class="social-slot" data-platform="vgen" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg viewBox="0 0 75 75" xmlns="http://www.w3.org/2000/svg"><title>VGen</title><g transform="translate(0,75) scale(0.1,-0.1)" fill="currentColor" stroke="none"><path d="M400 637 c-71 -23 -140 -120 -140 -197 0 -19 -4 -17 -32 18 -59 71 -111 89 -168 55 -34 -19 -50 -52 -50 -97 0 -73 186 -273 299 -321 47 -21 128 -18 179 5 55 25 152 117 203 193 46 70 51 120 18 182 -76 141 -189 200 -309 162z m148 -66 c50 -25 104 -102 104 -147 0 -43 -16 -68 -100 -154 -146 -148 -230 -146 -382 10 -90 91 -116 135 -96 165 28 43 52 32 149 -69 89 -91 127 -116 162 -102 12 4 8 15 -20 52 -41 53 -49 81 -42 134 14 105 127 161 225 111z"/><path d="M437 473 c-15 -15 -5 -63 19 -92 l26 -31 24 29 c29 34 31 62 6 84 -19 17 -63 23 -75 10z"/></g></svg></span>
-        <span class="visually-hidden">Wonffein on VGen (commissions)</span>
-      </a>
-      <a class="social-slot" data-platform="instagram" href="https://www.instagram.com/wonffein" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span>
-        <span class="visually-hidden">Wonffein on Instagram</span>
-      </a>
-      <a class="social-slot" data-platform="x" href="https://x.com/Wonffein" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></span>
-        <span class="visually-hidden">Wonffein on X (Twitter)</span>
-      </a>
-      <a class="social-slot" data-platform="discord" href="https://discord.gg/p6C6hsVAs" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></span>
-        <span class="visually-hidden">Wonffein on Discord</span>
-      </a>
-      <a class="social-slot" data-platform="bluesky" href="https://bsky.app/profile/wonffein.bsky.social" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Bluesky</title><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg></span>
-        <span class="visually-hidden">Wonffein on Bluesky</span>
-      </a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a class="site-nav__link" href="#gallery">Art</a>
+      <a class="site-nav__link" href="#commissions">Commissions</a>
+      <a class="site-nav__link" href="#about">About</a>
+      <a class="site-nav__link" href="#faq">FAQ</a>
+      <a class="btn btn--outline btn--small" href="#contact">Ask for a drawing</a>
     </nav>
   </div>
 </header>
 
-<main>
-  <section id="inicio" class="hero">
-    <div class="hero__blob hero__blob--one" aria-hidden="true"></div>
-    <div class="hero__blob hero__blob--two" aria-hidden="true"></div>
+<main id="main">
 
+  <!-- 1 · HERO — Won y su arte primero; "comisiones" es un botón secundario -->
+  <section id="inicio" class="hero">
+    <!-- Fondo del inicio: niebla morada que se mueve despacio y unas chispas lilas. Solo decoración. -->
+    <div class="hero__bg" aria-hidden="true">
+      <span class="hero__mist hero__mist--a"></span>
+      <span class="hero__mist hero__mist--b"></span>
+      <span class="hero__embers">
+        <i style="--x:6%;--s:3px;--d:11s;--w:-2s;--dx:20px"></i>
+        <i style="--x:13%;--s:4px;--d:15s;--w:-9s;--dx:-25px"></i>
+        <i style="--x:21%;--s:3px;--d:10s;--w:-5s;--dx:30px"></i>
+        <i style="--x:29%;--s:5px;--d:17s;--w:-13s;--dx:-15px"></i>
+        <i style="--x:36%;--s:3px;--d:12s;--w:-7s;--dx:25px"></i>
+        <i style="--x:44%;--s:4px;--d:14s;--w:-1s;--dx:-35px"></i>
+        <i style="--x:51%;--s:3px;--d:9s;--w:-4s;--dx:15px"></i>
+        <i style="--x:58%;--s:4px;--d:16s;--w:-11s;--dx:40px"></i>
+        <i style="--x:64%;--s:3px;--d:13s;--w:-8s;--dx:-20px"></i>
+        <i style="--x:71%;--s:5px;--d:18s;--w:-15s;--dx:30px"></i>
+        <i style="--x:77%;--s:3px;--d:11s;--w:-3s;--dx:-30px"></i>
+        <i style="--x:83%;--s:4px;--d:14s;--w:-10s;--dx:20px"></i>
+        <i style="--x:89%;--s:3px;--d:10s;--w:-6s;--dx:-25px"></i>
+        <i style="--x:94%;--s:4px;--d:15s;--w:-12s;--dx:15px"></i>
+      </span>
+      <span class="hero__fade"></span>
+    </div>
     <div class="container hero__inner">
       <div class="hero__text">
-        <p class="hero__eyebrow">✧ Vtuber &amp; Digital Artist ✧</p>
-        <h1 class="hero__title">Wonffein</h1>
-        <!--
-          Tagline: combinación corta de su "about" de Twitch (Fyly, cabra demonio de
-          Colombia, streams de arte, quiere ser artista profesional) y su "about me"
-          de VGen (le encanta dibujar OCs con detalle). Resumen en español de lo que
-          dice el texto en inglés de abajo:
-          "Hola, soy Won — una cabra demonio artista de Colombia. Transmite su camino
-          para convertirse en artista digital profesional, dibujando OCs con mucho
-          detalle y jugando (mal) videojuegos de por medio."
-        -->
-        <p class="hero__tagline">Hi, I'm Won — a demon goat artist from Colombia. I stream my journey to becoming a professional digital artist, drawing detailed OCs and gaming (badly) in between.</p>
+        <span class="chip chip--accent">Vtuber &amp; digital artist</span>
+        <h1 class="hero__title">Hi, I'm Won!</h1>
+        <p class="hero__tagline">A demon goat artist from Colombia. I stream my journey to becoming a professional digital artist, drawing detailed OCs and gaming (badly) in between.</p>
 
         <div class="hero__actions">
-          <a class="btn btn--primary" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer">Commission Art</a>
-          <a class="btn btn--ghost" href="https://twitch.tv/Wonffein" target="_blank" rel="noopener noreferrer">Watch on Twitch</a>
+          <a class="btn btn--primary" href="#gallery">See her art</a>
+          <a class="btn btn--outline" href="#commissions">Ask for a drawing</a>
         </div>
+
+        <nav class="social-nav hero__socials" aria-label="Wonffein's social links">
+          <a class="social-slot" href="https://www.twitch.tv/wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-twitch"/></svg><span class="visually-hidden">Wonffein on Twitch</span></a>
+          <a class="social-slot" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-vgen"/></svg><span class="visually-hidden">Wonffein on VGen (commissions)</span></a>
+          <a class="social-slot" href="https://www.instagram.com/wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-instagram"/></svg><span class="visually-hidden">Wonffein on Instagram</span></a>
+          <a class="social-slot" href="https://x.com/Wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-x"/></svg><span class="visually-hidden">Wonffein on X (Twitter)</span></a>
+          <a class="social-slot" href="https://discord.gg/p6C6hsVAs" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-discord"/></svg><span class="visually-hidden">Wonffein on Discord</span></a>
+          <a class="social-slot" href="https://bsky.app/profile/wonffein.bsky.social" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-bluesky"/></svg><span class="visually-hidden">Wonffein on Bluesky</span></a>
+        </nav>
       </div>
 
       <div class="hero__art">
-        <div class="hero__avatar hero__avatar--placeholder" aria-hidden="true">
-          <span class="hero__avatar-icon">🖼️</span>
-          <span class="hero__avatar-note">[EDITAR: art pendiente]</span>
+        <!-- Cuernos detrás del círculo: es assets/img/cuernos.png (PNG negro con fondo transparente); el CSS lo vuelve lila translúcido. Para cambiarlos, reemplaza ese archivo. -->
+        <img class="hero__horns" src="assets/img/cuernos.png" alt="" aria-hidden="true">
+        <div class="hero__ring" aria-hidden="true"></div>
+        <!-- Dibujo #1 (ya existe). Mejora futura: Won a medio cuerpo. -->
+        <div class="hero__avatar" data-slot="1">
+          <img src="assets/img/avatar-wave.png" alt="Illustration of Won waving hello">
         </div>
+        <!-- Dibujo #2 (ya existe): sticker que flota en la esquina -->
+        <img class="hero__sticker" data-slot="2" src="assets/img/emote-sparkle.png" alt="Won with sparkles in her eyes">
       </div>
     </div>
   </section>
 
-  <!--
-    About / Bio section.
-    Ideas de "Sick" a propósito NO usadas acá: layout fijo imagen-izq/texto-der.
-    En su lugar: panel de pestañas (izquierda) + imagen y texto (derecha) que
-    cambian con una transición de "aparecer/desaparecer" al elegir otra pestaña.
-    La lista de pestañas es un flex-column: si se agrega una más, solo se suma
-    otra fila, no hay que tocar el layout.
-    Contenido combinado del "about" de Twitch + el "about me" de VGen de Won.
-    Las 6 pestañas quedan con espacio reservado [EDITAR: art pendiente] — antes
-    4 reusaban las piezas de la Galería como relleno, pero Nezash prefiere
-    dejarlas pendientes también para pedirle a Won arte específico para cada
-    contexto en vez de repetir lo mismo que ya se ve en la Galería.
-  -->
-  <section id="about" class="about reveal">
-    <!-- Decoración de fondo, no es arte de Won: brasas chiquitas que suben
-         despacio, mismo recurso que los brillitos ✦ del Hero pero como
-         partículas — solo transform/opacity, aria-hidden. -->
-    <div class="embers" aria-hidden="true">
-      <span class="ember"></span>
-      <span class="ember"></span>
-      <span class="ember"></span>
-      <span class="ember"></span>
-      <span class="ember"></span>
-    </div>
-    <div class="container about__inner">
-      <p class="section-eyebrow">✧ Get To Know Won ✧</p>
-      <h2 class="section-title">Who's Won?</h2>
-
-      <!--
-        El texto largo que antes iba acá como párrafo suelto ahora está
-        repartido dentro de cada pestaña (Who is she? / The goal / Games /
-        On stream), en vez de repetirse aparte.
-      -->
-      <div class="fact-card-shell">
-        <div class="fact-card-shell__glow" aria-hidden="true"></div>
-        <p class="fact-card-shell__hint">✧ Tap a topic to find out more ✧</p>
-
-        <div class="fact-panel">
-          <div class="fact-panel__tabs" role="tablist" aria-label="Get to know Won — topics">
-            <button type="button" class="fact-tab is-active" role="tab" aria-selected="true" aria-controls="fact-0" data-target="fact-0">Who is she?</button>
-            <button type="button" class="fact-tab" role="tab" aria-selected="false" aria-controls="fact-1" data-target="fact-1">The goal</button>
-            <button type="button" class="fact-tab" role="tab" aria-selected="false" aria-controls="fact-2" data-target="fact-2">Art style</button>
-            <button type="button" class="fact-tab" role="tab" aria-selected="false" aria-controls="fact-3" data-target="fact-3">Games</button>
-            <button type="button" class="fact-tab" role="tab" aria-selected="false" aria-controls="fact-4" data-target="fact-4">On stream</button>
-            <button type="button" class="fact-tab" role="tab" aria-selected="false" aria-controls="fact-5" data-target="fact-5">Say hi</button>
-          </div>
-
-          <div class="fact-panel__stage">
-            <div class="fact-content is-active" id="fact-0" role="tabpanel">
-              <div class="fact-content__art fact-content__art--placeholder" aria-hidden="true">
-                <span class="fact-content__art-icon">🖼️</span>
-                <span class="fact-content__art-note">[EDITAR: art pendiente]</span>
-              </div>
-              <p class="fact-content__text">Behind the screen is Won — a demon goat artist and streamer making her way from Colombia. Won or Wonffein, same name everywhere.</p>
-            </div>
-
-            <div class="fact-content" id="fact-1" role="tabpanel">
-              <div class="fact-content__art fact-content__art--placeholder" aria-hidden="true">
-                <span class="fact-content__art-icon">🖼️</span>
-                <span class="fact-content__art-note">[EDITAR: art pendiente]</span>
-              </div>
-              <p class="fact-content__text">Chasing the goal of going pro as a digital artist, one stream at a time.</p>
-            </div>
-
-            <div class="fact-content" id="fact-2" role="tabpanel">
-              <div class="fact-content__art fact-content__art--placeholder" aria-hidden="true">
-                <span class="fact-content__art-icon">🖼️</span>
-                <span class="fact-content__art-note">[EDITAR: art pendiente]</span>
-              </div>
-              <p class="fact-content__text">Loves drawing OCs, obsessing over details, and experimenting — on stream and sometimes IRL too.</p>
-            </div>
-
-            <div class="fact-content" id="fact-3" role="tabpanel">
-              <div class="fact-content__art fact-content__art--placeholder" aria-hidden="true">
-                <span class="fact-content__art-icon">🖼️</span>
-                <span class="fact-content__art-note">[EDITAR: art pendiente]</span>
-              </div>
-              <p class="fact-content__text">League of Legends, Genshin Impact (mostly spent wandering around Teyvat), Honkai: Star Rail, and any indie game that catches her eye — never claiming to be good at any of them.</p>
-            </div>
-
-            <div class="fact-content" id="fact-4" role="tabpanel">
-              <div class="fact-content__art fact-content__art--placeholder" aria-hidden="true">
-                <span class="fact-content__art-icon">🖼️</span>
-                <span class="fact-content__art-note">[EDITAR: art pendiente]</span>
-              </div>
-              <p class="fact-content__text">Spends most of her streams working on art — and doing her best to hold a conversation at the same time. A little bit of an airhead, always working on it.</p>
-            </div>
-
-            <div class="fact-content" id="fact-5" role="tabpanel">
-              <div class="fact-content__art fact-content__art--placeholder" aria-hidden="true">
-                <span class="fact-content__art-icon">🖼️</span>
-                <span class="fact-content__art-note">[EDITAR: art pendiente]</span>
-              </div>
-              <p class="fact-content__text">Same handle on every platform — feel free to reach out any time, Discord included.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--
-    Galería. Solo la imagen, bien encuadrada — sin texto encima (el caption
-    de cada pieza sigue existiendo pero oculto visualmente, solo para el
-    lightbox y lectores de pantalla; se puede volver a mostrar más adelante
-    si se quiere). Grid con auto-fill/minmax: si se agrega arte nuevo, solo
-    hay que sumar otro <li class="gallery-item"> — el layout se acomoda
-    solo, mismo criterio "grid y listo" que se usó en las pestañas de About.
-    El lightbox (#lightbox, al final del body) es un solo componente
-    compartido para todas las piezas, con navegación por flechas y Escape.
-
-    Orden de esta parte de la página, pedido por Nezash: primero el arte,
-    después si está en vivo o no (stream), y al final el horario.
-  -->
-  <section id="gallery" class="gallery reveal">
-    <div class="ambient-blob ambient-blob--tr ambient-blob--violet" aria-hidden="true"></div>
-    <div class="ambient-blob ambient-blob--bl ambient-blob--pink" aria-hidden="true"></div>
+  <!-- 2 · GALERÍA — la sección más grande: que se sienta una tienda de arte -->
+  <section id="gallery" class="section section--white reveal">
     <div class="container">
-      <p class="section-eyebrow">✧ Gallery ✧</p>
+      <p class="section-eyebrow">Gallery</p>
       <h2 class="section-title">A peek at her art</h2>
-      <p class="gallery__intro">All the art Won has ready to show so far — more gets added as she makes it.</p>
+      <p class="section-intro">Hand-picked pieces. More get added as she makes them.</p>
+
+      <div class="chip-row gallery-filters" role="group" aria-label="Filter the gallery">
+        <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="chip" data-filter="illustrations" aria-pressed="false">Illustrations</button>
+        <button type="button" class="chip" data-filter="chibis" aria-pressed="false">Chibis</button>
+        <button type="button" class="chip" data-filter="emotes" aria-pressed="false">Emotes</button>
+        <button type="button" class="chip" data-filter="sketches" aria-pressed="false">Sketches</button>
+      </div>
 
       <ul class="gallery-grid">
-        <li class="gallery-item">
-          <button type="button" class="gallery-item__trigger" data-index="0">
-            <img src="assets/img/avatar-wave.png" alt="Illustration of Won waving hello" loading="lazy">
-            <span class="gallery-item__caption visually-hidden">Hey there! 👋</span>
+        <!-- #5 pendiente -->
+        <li class="gallery-item gallery-item--tall" data-category="illustrations">
+          <figure class="art-slot art-slot--pending" data-slot="5">
+            <div class="art-slot__placeholder">
+              <span class="art-slot__num">5</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>
+              <span class="art-slot__label">Ilustración de cuerpo completo</span>
+              <span class="art-slot__hint">Arte pendiente · vertical 3:4</span>
+            </div>
+          </figure>
+        </li>
+
+        <!-- #3 (ya existe) -->
+        <li class="gallery-item" data-category="chibis">
+          <button type="button" class="gallery-item__trigger">
+            <img src="assets/img/banner-love.png" alt="Illustration of Won with a big heart" loading="lazy">
+            <span class="gallery-item__caption visually-hidden">Sending some love</span>
           </button>
         </li>
-        <li class="gallery-item">
-          <button type="button" class="gallery-item__trigger" data-index="1">
+
+        <!-- #6 pendiente -->
+        <li class="gallery-item gallery-item--wide" data-category="illustrations">
+          <figure class="art-slot art-slot--pending" data-slot="6">
+            <div class="art-slot__placeholder">
+              <span class="art-slot__num">6</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>
+              <span class="art-slot__label">Escena horizontal con fondo</span>
+              <span class="art-slot__hint">Arte pendiente · apaisada 16:9</span>
+            </div>
+          </figure>
+        </li>
+
+        <!-- #4 (ya existe) -->
+        <li class="gallery-item" data-category="emotes">
+          <button type="button" class="gallery-item__trigger">
             <img src="assets/img/lurk-screen.png" alt="Won's stream lurk screen illustration" loading="lazy">
             <span class="gallery-item__caption visually-hidden">Lurk mode</span>
           </button>
         </li>
-        <li class="gallery-item">
-          <button type="button" class="gallery-item__trigger" data-index="2">
-            <img src="assets/img/banner-love.png" alt="Illustration of Won with a big heart banner" loading="lazy">
-            <span class="gallery-item__caption visually-hidden">Sending some love</span>
-          </button>
+
+        <!-- #7 pendiente -->
+        <li class="gallery-item" data-category="chibis">
+          <figure class="art-slot art-slot--pending" data-slot="7">
+            <div class="art-slot__placeholder">
+              <span class="art-slot__num">7</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>
+              <span class="art-slot__label">Chibi de un OC</span>
+              <span class="art-slot__hint">Arte pendiente · cuadrado 1:1</span>
+            </div>
+          </figure>
         </li>
-        <li class="gallery-item">
-          <button type="button" class="gallery-item__trigger" data-index="3">
-            <img src="assets/img/emote-sparkle.png" alt="Close-up illustration of Won with a surprised, sparkly expression" loading="lazy">
-            <span class="gallery-item__caption visually-hidden">So excited! ✧</span>
-          </button>
+
+        <!-- #8 pendiente -->
+        <li class="gallery-item" data-category="illustrations">
+          <figure class="art-slot art-slot--pending" data-slot="8">
+            <div class="art-slot__placeholder">
+              <span class="art-slot__num">8</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>
+              <span class="art-slot__label">Retrato o busto con render</span>
+              <span class="art-slot__hint">Arte pendiente · cuadrado 1:1</span>
+            </div>
+          </figure>
+        </li>
+
+        <!-- #9 pendiente -->
+        <li class="gallery-item" data-category="sketches">
+          <figure class="art-slot art-slot--pending" data-slot="9">
+            <div class="art-slot__placeholder">
+              <span class="art-slot__num">9</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>
+              <span class="art-slot__label">Boceto o WIP</span>
+              <span class="art-slot__hint">Arte pendiente · lineart</span>
+            </div>
+          </figure>
+        </li>
+
+        <!-- #10 pendiente -->
+        <li class="gallery-item gallery-item--wide" data-category="emotes">
+          <figure class="art-slot art-slot--pending" data-slot="10">
+            <div class="art-slot__placeholder">
+              <span class="art-slot__num">10</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>
+              <span class="art-slot__label">Hoja con varios emotes</span>
+              <span class="art-slot__hint">Arte pendiente · 4 a 6 emotes juntos</span>
+            </div>
+          </figure>
+        </li>
+
+        <li class="gallery-item" data-category="always">
+          <div class="gallery-more">
+            <h3 class="gallery-more__title">Want to see more?</h3>
+            <p class="gallery-more__text">Everything else lives on her Instagram and X.</p>
+            <a class="btn btn--outline btn--small" href="https://www.instagram.com/wonffein" target="_blank" rel="noopener noreferrer">Open Instagram</a>
+          </div>
         </li>
       </ul>
     </div>
   </section>
 
-  <!--
-    Stream en vivo. El embed oficial de Twitch ya resuelve solo "está en vivo
-    o no" (si está offline, Twitch muestra su pantalla de offline / últimos
-    videos automáticamente) — no hace falta lógica propia para eso.
-
-    IMPORTANTE al desplegar: el parámetro `parent` tiene que coincidir con el
-    dominio real donde viva la página. Ya está publicada en GitHub Pages en
-    https://nezash.github.io/WonffeinPage/ — el parent es solo el hostname
-    (nezash.github.io), sin el "https://" ni el "/WonffeinPage/". Se deja
-    también "parent=localhost" para poder seguir probando cambios en este
-    entorno sin que se rompa el embed. Si algún día se pasa a un dominio
-    propio (ej. wonffein.com), hay que sumar un tercer `&parent=` con ese.
-  -->
-  <section id="stream" class="stream-status reveal">
-    <div class="ambient-blob ambient-blob--tl ambient-blob--pink" aria-hidden="true"></div>
-    <div class="ambient-blob ambient-blob--br ambient-blob--violet" aria-hidden="true"></div>
+  <!-- 3 · COMISIONES — cada tipo se vende con un dibujo de ejemplo; el precio va chiquito -->
+  <section id="commissions" class="section section--lilac reveal">
     <div class="container">
-      <p class="section-eyebrow">✧ Right Now ✧</p>
-      <h2 class="section-title">Is she live?</h2>
-      <p class="stream-status__intro">This updates on its own — live when she's streaming, or her latest videos when she's not.</p>
+      <p class="section-eyebrow">Commissions</p>
+      <h2 class="section-title">Want something drawn just for you?</h2>
+      <p class="section-intro">Pick a style, tell Won your idea, and she sketches it with you step by step. Every commission goes request → sketch approval → WIPs → final file.</p>
 
-      <div class="stream-status__embed">
-        <iframe
-          src="https://player.twitch.tv/?channel=wonffein&parent=nezash.github.io&parent=localhost&muted=true"
-          allowfullscreen
-          title="Wonffein's Twitch stream"
-        ></iframe>
-      </div>
-
-      <a class="btn btn--ghost stream-status__cta" href="https://twitch.tv/Wonffein" target="_blank" rel="noopener noreferrer">Open on Twitch</a>
-    </div>
-  </section>
-
-  <!-- Horario real (de la captura de Twitch que pasó Nezash). -->
-  <section id="schedule" class="schedule reveal">
-    <div class="container">
-      <div class="schedule-card">
-        <p class="section-eyebrow">✧ Stream Schedule ✧</p>
-        <div class="schedule-card__table-wrap">
-          <table class="schedule-table">
-            <caption class="visually-hidden">Won's weekly stream schedule</caption>
-            <thead>
-              <tr>
-                <th scope="col"><span class="visually-hidden">Time</span></th>
-                <th scope="col">Mon</th>
-                <th scope="col">Tue</th>
-                <th scope="col">Wed</th>
-                <th scope="col">Thu</th>
-                <th scope="col">Fri</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">4pm</th>
-                <td>Art</td><td>Art</td><td>Art</td><td>Art</td><td>Art</td>
-              </tr>
-              <tr>
-                <th scope="row">6pm</th>
-                <td>Art</td><td>Art</td><td>Art</td><td>Art</td><td>Art</td>
-              </tr>
-              <tr>
-                <th scope="row">7pm</th>
-                <td class="schedule-table__cell--special">Uma</td><td>Art</td><td>Art</td><td>Art</td><td>Art</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <a class="schedule-card__link" href="https://twitch.tv/Wonffein" target="_blank" rel="noopener noreferrer">twitch.tv/Wonffein</a>
-      </div>
-    </div>
-  </section>
-
-  <!--
-    Precios de comisiones. Datos reales que pasó Nezash (copiados directo de
-    los 3 servicios activos en VGen: Chibi Icon, Chibi Discord Stamp e
-    Illustration Rendered). El arte de cada servicio todavía no está listo
-    ("las imágenes pon un espacio para colocarlos pero todavía no" — Nezash),
-    así que cada card usa el mismo placeholder punteado que ya se usa en
-    About (fact-content__art--placeholder). Grid auto-fill/minmax: agregar
-    un servicio nuevo más adelante es sumar un <li>, no hay que tocar el CSS.
-
-    Los recargos por uso (+50% privado / +200% comercial) son iguales en
-    los 3 servicios (vienen de los Términos de comisión, no son propios de
-    cada servicio) — se resumen una sola vez abajo del grid en vez de
-    repetirlos 3 veces por card.
-  -->
-  <section id="pricing" class="pricing reveal">
-    <div class="container">
-      <p class="section-eyebrow">✧ Commission Prices ✧</p>
-      <h2 class="section-title">Commission a piece</h2>
-      <p class="pricing__intro">Every commission goes request → sketch approval → WIPs → final file. Prices below are starting prices for personal use — full process and policies are in the commission terms further down.</p>
-
-      <ul class="pricing-grid">
-        <li class="pricing-card">
-          <div class="pricing-card__art pricing-card__art--placeholder" aria-hidden="true">
-            <span class="pricing-card__art-icon">🖼️</span>
-            <span class="pricing-card__art-note">[EDITAR: art pendiente]</span>
+      <!--
+        Datos reales copiados de los 3 servicios activos en VGen (Chibi Icon, Chibi Discord Stamp,
+        Illustration Rendered). Los recargos por uso (+50% privado / +200% comercial) son iguales
+        en los 3 servicios, por eso se resumen una sola vez abajo.
+      -->
+      <ul class="services-grid">
+        <li class="service-card">
+          <!-- #11 listo: ejemplo de un Icon -->
+          <figure class="art-slot art-slot--filled" data-slot="11" style="--ratio: 1 / 1">
+            <img src="assets/img/commission-icon.jpg" alt="Example of a chibi Icon commission: a close-up of a character with dark red hair, pink eyes and a pink-to-blue frame" loading="lazy" width="1000" height="1000">
+          </figure>
+          <p class="service-card__category">Chibi</p>
+          <div class="service-card__head">
+            <h3 class="service-card__title">Icon</h3>
+            <span class="chip chip--accent">from $20</span>
           </div>
-          <p class="pricing-card__category">Chibi</p>
-          <h3 class="pricing-card__title">Icon</h3>
-          <p class="pricing-card__price">From <strong>$20 USD</strong></p>
-
-          <div class="pricing-card__section">
-            <p class="pricing-card__label">Includes</p>
-            <ul class="pricing-card__list">
-              <li>Fully rendered illustration</li>
-              <li>Background included</li>
-              <li>300 dpi · 2000×2000px (custom size on request)</li>
-              <li>PNG file</li>
-            </ul>
-          </div>
-
-          <div class="pricing-card__section">
-            <p class="pricing-card__label">Add-ons</p>
-            <ul class="pricing-card__list pricing-card__list--muted">
+          <p class="service-card__desc">A cute chibi for your avatar, with a background.</p>
+          <ul class="service-card__list">
+            <li>Fully rendered illustration</li>
+            <li>Background included</li>
+            <li>300 dpi · 2000×2000px (custom size on request)</li>
+            <li>PNG file</li>
+          </ul>
+          <details class="service-card__more">
+            <summary>Extras &amp; details</summary>
+            <p class="service-card__more-label">Add-ons</p>
+            <ul class="service-card__list">
               <li>Flag variations (e.g. two icon versions)</li>
               <li>Extra characters (smaller chibis, pets)</li>
             </ul>
-          </div>
-
-          <div class="pricing-card__footer">
-            <p class="pricing-card__note">No refunds.</p>
-            <a class="pricing-card__link" href="https://vgen.co/Wonffein/service/pridemonth-chiicon/98ef6eb6-f364-4747-9b2f-d2b5e3039dbb" target="_blank" rel="noopener noreferrer">Request this on VGen →</a>
-          </div>
+          </details>
+          <p class="service-card__note">No refunds.</p>
+          <a class="btn btn--outline" href="https://vgen.co/Wonffein/service/pridemonth-chiicon/98ef6eb6-f364-4747-9b2f-d2b5e3039dbb" target="_blank" rel="noopener noreferrer">Ask for this on VGen</a>
         </li>
 
-        <li class="pricing-card">
-          <div class="pricing-card__art pricing-card__art--placeholder" aria-hidden="true">
-            <span class="pricing-card__art-icon">🖼️</span>
-            <span class="pricing-card__art-note">[EDITAR: art pendiente]</span>
+        <li class="service-card">
+          <!-- #12 listo: ejemplo de un Discord Stamp -->
+          <figure class="art-slot art-slot--filled" data-slot="12" style="--ratio: 1 / 1">
+            <img src="assets/img/commission-stamp.png" alt="Example of a Discord Stamp commission: a chibi sticker of a white-haired elf with blue eyes and a flower hair clip" loading="lazy" width="1000" height="1000">
+          </figure>
+          <p class="service-card__category">Chibi</p>
+          <div class="service-card__head">
+            <h3 class="service-card__title">Discord Stamp</h3>
+            <span class="chip chip--accent">from $25</span>
           </div>
-          <p class="pricing-card__category">Chibi</p>
-          <h3 class="pricing-card__title">Discord Stamp</h3>
-          <p class="pricing-card__price">From <strong>$25 USD</strong></p>
-
-          <div class="pricing-card__section">
-            <p class="pricing-card__label">Includes</p>
-            <ul class="pricing-card__list">
-              <li>1000×1000px</li>
-              <li>PNG, no background, lighter border</li>
-              <li>With or without text</li>
-            </ul>
-          </div>
-
-          <div class="pricing-card__section">
-            <p class="pricing-card__label">Details</p>
-            <ul class="pricing-card__list pricing-card__list--muted">
+          <p class="service-card__desc">A little sticker of your OC, ready for your Discord server.</p>
+          <ul class="service-card__list">
+            <li>1000×1000px</li>
+            <li>PNG, no background, lighter border</li>
+            <li>With or without text</li>
+          </ul>
+          <details class="service-card__more">
+            <summary>Extras &amp; details</summary>
+            <p class="service-card__more-label">Details</p>
+            <ul class="service-card__list">
               <li>Line weight can vary on request</li>
               <li>Colour palette can be specified (e.g. pastel, muted) — defaults to slightly vibrant / canon colours</li>
               <li>2+ small extra elements (consoles, buttons, effects) +$1 · bigger elements (mascots) +$2</li>
             </ul>
-          </div>
-
-          <div class="pricing-card__section">
-            <p class="pricing-card__label">Add-ons</p>
-            <ul class="pricing-card__list pricing-card__list--muted">
+            <p class="service-card__more-label">Add-ons</p>
+            <ul class="service-card__list">
               <li>One more character +$5</li>
             </ul>
-          </div>
-
-          <div class="pricing-card__footer">
-            <p class="pricing-card__note">Sketch approval is final — no full redraws after. No refunds.</p>
-            <a class="pricing-card__link" href="https://vgen.co/Wonffein/service/discord-stamp/e60ae74f-d438-4bf0-9278-e0a2ad4505f2" target="_blank" rel="noopener noreferrer">Request this on VGen →</a>
-          </div>
+          </details>
+          <p class="service-card__note">Sketch approval is final — no full redraws after. No refunds.</p>
+          <a class="btn btn--outline" href="https://vgen.co/Wonffein/service/discord-stamp/e60ae74f-d438-4bf0-9278-e0a2ad4505f2" target="_blank" rel="noopener noreferrer">Ask for this on VGen</a>
         </li>
 
-        <li class="pricing-card">
-          <div class="pricing-card__art pricing-card__art--placeholder" aria-hidden="true">
-            <span class="pricing-card__art-icon">🖼️</span>
-            <span class="pricing-card__art-note">[EDITAR: art pendiente]</span>
+        <li class="service-card">
+          <!-- #13 listo: ejemplo de un Rendered -->
+          <figure class="art-slot art-slot--filled" data-slot="13" style="--ratio: 1 / 1">
+            <img src="assets/img/commission-rendered.jpg" alt="Example of a Rendered illustration: a character with long blue and pink hair and a small black creature on her head" loading="lazy" width="1000" height="1000">
+          </figure>
+          <p class="service-card__category">Illustration</p>
+          <div class="service-card__head">
+            <h3 class="service-card__title">Rendered</h3>
+            <span class="chip chip--accent">from $30</span>
           </div>
-          <p class="pricing-card__category">Illustration</p>
-          <h3 class="pricing-card__title">Rendered</h3>
-          <p class="pricing-card__price">From <strong>$30 USD</strong></p>
-
-          <div class="pricing-card__section">
-            <p class="pricing-card__label">Includes</p>
-            <ul class="pricing-card__list">
-              <li>Illustration sized per the request form</li>
-              <li>Full colour, no background</li>
-              <li>PNG file</li>
-            </ul>
-          </div>
-
-          <div class="pricing-card__section">
-            <p class="pricing-card__label">Add-ons</p>
-            <ul class="pricing-card__list pricing-card__list--muted">
+          <p class="service-card__desc">A full-colour illustration of your character.</p>
+          <ul class="service-card__list">
+            <li>Illustration sized per the request form</li>
+            <li>Full colour, no background</li>
+            <li>PNG file</li>
+          </ul>
+          <details class="service-card__more">
+            <summary>Extras &amp; details</summary>
+            <p class="service-card__more-label">Add-ons</p>
+            <ul class="service-card__list">
               <li>Extra character +30%</li>
               <li>NSFW version +20%</li>
               <li>Rush fee +20%</li>
               <li>Privacy fee +50%</li>
               <li>Background +20–40% (depends on complexity)</li>
             </ul>
-          </div>
-
-          <div class="pricing-card__footer">
-            <p class="pricing-card__note">Discord is the fastest way to reach her with questions — @Wonffein.</p>
-            <a class="pricing-card__link" href="https://vgen.co/Wonffein/service/rendered-/ccbdbfab-9ae2-476d-b2c7-e5cdcdb7f2f1" target="_blank" rel="noopener noreferrer">Request this on VGen →</a>
-          </div>
+          </details>
+          <p class="service-card__note">Discord is the fastest way to reach her with questions — @Wonffein.</p>
+          <a class="btn btn--outline" href="https://vgen.co/Wonffein/service/rendered-/ccbdbfab-9ae2-476d-b2c7-e5cdcdb7f2f1" target="_blank" rel="noopener noreferrer">Ask for this on VGen</a>
         </li>
       </ul>
 
-      <p class="pricing__legend">Prices above are for personal use, converted to USD. Private commission (can't be posted publicly) <strong>+50%</strong> · commercial use <strong>+200%</strong> — see the <a href="#terms">commission terms</a> for what counts as each.</p>
+      <div class="services-extras">
+        <p>Prices are for personal use, in USD. Private commission (can't be posted publicly) <strong>+50%</strong> · commercial use <strong>+200%</strong> — see the <a href="#terms">commission terms</a>.</p>
+        <a href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer"><strong>See all commissions on VGen</strong></a>
+      </div>
 
-      <a class="btn btn--primary pricing__cta" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer">See all commissions on VGen</a>
+      <!-- #14 pendiente: 4 comisiones recientes (pedir permiso a cada cliente) -->
+      <div class="recent-work">
+        <div class="recent-work__intro">
+          <h3 class="recent-work__title">Made for lovely clients</h3>
+          <p class="recent-work__text">A few of her latest commissions.</p>
+        </div>
+        <figure class="art-slot art-slot--pending" data-slot="14a">
+          <div class="art-slot__placeholder"><span class="art-slot__num">14</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg><span class="art-slot__label">Comisión 1</span></div>
+        </figure>
+        <figure class="art-slot art-slot--pending" data-slot="14b">
+          <div class="art-slot__placeholder"><span class="art-slot__num">14</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg><span class="art-slot__label">Comisión 2</span></div>
+        </figure>
+        <figure class="art-slot art-slot--pending" data-slot="14c">
+          <div class="art-slot__placeholder"><span class="art-slot__num">14</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg><span class="art-slot__label">Comisión 3</span></div>
+        </figure>
+        <figure class="art-slot art-slot--pending" data-slot="14d">
+          <div class="art-slot__placeholder"><span class="art-slot__num">14</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg><span class="art-slot__label">Comisión 4</span></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · CÓMO FUNCIONA — reemplaza el muro de texto; el detalle completo está en Terms -->
+  <section id="process" class="section reveal">
+    <div class="container">
+      <p class="section-eyebrow">How it works</p>
+      <h2 class="section-title">From idea to finished art</h2>
+
+      <ol class="steps">
+        <li class="step">
+          <!-- #15 pendiente -->
+          <figure class="art-slot art-slot--pending" data-slot="15">
+            <div class="art-slot__placeholder"><span class="art-slot__num">15</span><span class="art-slot__label">Mini Won enviando un mensaje</span><span class="art-slot__hint">Arte pendiente</span></div>
+          </figure>
+          <span class="chip chip--accent">Step 1</span>
+          <h3 class="step__title">Send your idea</h3>
+          <p class="step__text">Request on VGen or message her on Discord.</p>
+        </li>
+        <li class="step">
+          <!-- #16 pendiente -->
+          <figure class="art-slot art-slot--pending" data-slot="16">
+            <div class="art-slot__placeholder"><span class="art-slot__num">16</span><span class="art-slot__label">Mini Won con lápiz</span><span class="art-slot__hint">Arte pendiente</span></div>
+          </figure>
+          <span class="chip chip--accent">Step 2</span>
+          <h3 class="step__title">Approve the sketch</h3>
+          <p class="step__text">You get a watermarked sketch first, with 5 free revisions.</p>
+        </li>
+        <li class="step">
+          <!-- #17 pendiente -->
+          <figure class="art-slot art-slot--pending" data-slot="17">
+            <div class="art-slot__placeholder"><span class="art-slot__num">17</span><span class="art-slot__label">Mini Won pintando</span><span class="art-slot__hint">Arte pendiente</span></div>
+          </figure>
+          <span class="chip chip--accent">Step 3</span>
+          <h3 class="step__title">Watch it come alive</h3>
+          <p class="step__text">She sends WIPs while she colours and renders.</p>
+        </li>
+        <li class="step">
+          <!-- #18 pendiente -->
+          <figure class="art-slot art-slot--pending" data-slot="18">
+            <div class="art-slot__placeholder"><span class="art-slot__num">18</span><span class="art-slot__label">Mini Won entregando un regalo</span><span class="art-slot__hint">Arte pendiente</span></div>
+          </figure>
+          <span class="chip chip--accent">Step 4</span>
+          <h3 class="step__title">Get your final file</h3>
+          <p class="step__text">A clean PNG, ready to use.</p>
+        </li>
+      </ol>
+
+      <a class="process__link" href="#terms">Read the full terms →</a>
+    </div>
+  </section>
+
+  <!-- 5 · SOBRE WON + STREAM + HORARIO — bio corta, estado en vivo y horario juntos -->
+  <section id="about" class="section section--white reveal">
+    <div class="container">
+      <div class="about__inner">
+        <!-- #19 pendiente: Won dibujando con su tablet -->
+        <figure class="art-slot art-slot--pending about__art" data-slot="19" style="--ratio: 4 / 5">
+          <div class="art-slot__placeholder">
+            <span class="art-slot__num">19</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>
+            <span class="art-slot__label">Won dibujando con su tablet</span>
+            <span class="art-slot__hint">Arte pendiente · medio cuerpo 4:5</span>
+          </div>
+        </figure>
+
+        <div class="about__text">
+          <p class="section-eyebrow">About</p>
+          <h2 class="section-title">Who's Won?</h2>
+          <p class="section-intro">Behind the screen is Won, a demon goat artist and streamer from Colombia, chasing the goal of going pro one stream at a time.</p>
+
+          <div class="chip-row about__tabs" role="tablist" aria-label="Get to know Won — topics">
+            <button type="button" class="chip fact-tab is-active" role="tab" aria-selected="true" aria-controls="fact-0" data-target="fact-0">Who is she?</button>
+            <button type="button" class="chip fact-tab" role="tab" aria-selected="false" aria-controls="fact-1" data-target="fact-1">The goal</button>
+            <button type="button" class="chip fact-tab" role="tab" aria-selected="false" aria-controls="fact-2" data-target="fact-2">Art style</button>
+            <button type="button" class="chip fact-tab" role="tab" aria-selected="false" aria-controls="fact-3" data-target="fact-3">Games</button>
+            <button type="button" class="chip fact-tab" role="tab" aria-selected="false" aria-controls="fact-4" data-target="fact-4">On stream</button>
+            <button type="button" class="chip fact-tab" role="tab" aria-selected="false" aria-controls="fact-5" data-target="fact-5">Say hi</button>
+          </div>
+
+          <div class="about__stage">
+            <p class="fact-content is-active" id="fact-0" role="tabpanel">Behind the screen is Won — a demon goat artist and streamer making her way from Colombia. Won or Wonffein, same name everywhere.</p>
+            <p class="fact-content" id="fact-1" role="tabpanel">Chasing the goal of going pro as a digital artist, one stream at a time.</p>
+            <p class="fact-content" id="fact-2" role="tabpanel">Loves drawing OCs, obsessing over details, and experimenting — on stream and sometimes IRL too.</p>
+            <p class="fact-content" id="fact-3" role="tabpanel">League of Legends, Genshin Impact (mostly spent wandering around Teyvat), Honkai: Star Rail, and any indie game that catches her eye — never claiming to be good at any of them.</p>
+            <p class="fact-content" id="fact-4" role="tabpanel">Spends most of her streams working on art — and doing her best to hold a conversation at the same time. A little bit of an airhead, always working on it.</p>
+            <p class="fact-content" id="fact-5" role="tabpanel">Same handle on every platform — feel free to reach out any time, Discord included.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="live-row">
+        <!--
+          Stream en vivo. El embed oficial de Twitch ya resuelve solo "está en vivo o no".
+          IMPORTANTE al desplegar: el parámetro `parent` tiene que coincidir con el dominio real.
+          Hoy: https://nezash.github.io/WonffeinPage/ → parent=nezash.github.io (solo el hostname).
+          Se deja parent=localhost para probar en local. Si algún día hay dominio propio, sumar otro &parent=.
+        -->
+        <div class="live-card" id="stream">
+          <span class="chip chip--accent">Right now</span>
+          <h3 class="live-card__title">Is she live?</h3>
+          <p class="live-card__text">Updates on its own — live when she's streaming, or her latest videos when she's not.</p>
+          <div class="stream-embed">
+            <iframe
+              src="https://player.twitch.tv/?channel=wonffein&amp;parent=nezash.github.io&amp;parent=localhost&amp;muted=true"
+              allowfullscreen
+              loading="lazy"
+              title="Wonffein's Twitch stream"
+            ></iframe>
+          </div>
+          <a class="btn btn--outline btn--small live-card__cta" href="https://twitch.tv/Wonffein" target="_blank" rel="noopener noreferrer">Open on Twitch</a>
+        </div>
+
+        <!-- Horario: Won transmite casi todos los días, pero a horas distintas. Por eso no hay tabla de horas fijas;
+             se manda a la página de horario de Twitch, que ella actualiza. -->
+        <div class="live-card" id="schedule">
+          <span class="chip chip--accent">Stream schedule</span>
+          <h3 class="live-card__title">Come hang out</h3>
+          <p class="live-card__text">Won streams almost every day, just not always at the same hour. Follow her on Twitch and you'll get a ping when she goes live.</p>
+          <ul class="day-pills" aria-label="Won streams on most days of the week">
+            <li>Mon</li><li>Tue</li><li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li><li>Sun</li>
+          </ul>
+          <p class="schedule__note">Hours change from day to day.</p>
+          <div class="schedule__actions">
+            <a class="btn btn--outline btn--small" href="https://www.twitch.tv/Wonffein/schedule" target="_blank" rel="noopener noreferrer">See this week's schedule</a>
+            <a class="schedule__link" href="https://twitch.tv/Wonffein" target="_blank" rel="noopener noreferrer">twitch.tv/Wonffein</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · DUDAS FRECUENTES — filas que se abren; a un lado "la versión corta" de las reglas -->
+  <section id="faq" class="section reveal">
+    <div class="container">
+      <p class="section-eyebrow">Good to know</p>
+      <h2 class="section-title">Questions</h2>
+      <p class="section-intro">The short version of the commission terms — the full details are always in the <a href="#terms">Terms of Service</a> below.</p>
+
+      <div class="faq__layout">
+        <div class="accordion">
+          <div class="accordion-item">
+            <h3 class="accordion-item__heading">
+              <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="faq-panel-0" id="faq-tab-0">
+                <span>How long does a commission take?</span>
+                <span class="accordion-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-item__panel" id="faq-panel-0" role="region" aria-labelledby="faq-tab-0" aria-hidden="true">
+              <div class="accordion-item__panel-inner"><p>Anywhere from 3 days to 2 months, depending on order and complexity. If it's running slower than expected, Won will reach out right away.</p></div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-item__heading">
+              <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="faq-panel-1" id="faq-tab-1">
+                <span>Can I get a refund?</span>
+                <span class="accordion-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-item__panel" id="faq-panel-1" role="region" aria-labelledby="faq-tab-1" aria-hidden="true">
+              <div class="accordion-item__panel-inner"><p>Payment is full and upfront, and refunds follow VGen's refund policy. Make sure you're happy with the service and price before commissioning.</p></div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-item__heading">
+              <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-tab-2">
+                <span>Can I use the art commercially?</span>
+                <span class="accordion-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-item__panel" id="faq-panel-2" role="region" aria-labelledby="faq-tab-2" aria-hidden="true">
+              <div class="accordion-item__panel-inner"><p>The listed price covers personal use. Commercial use (merch, direct profit) is 200% of the base price — stream-related use is generally fine at the personal rate.</p></div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-item__heading">
+              <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-tab-3">
+                <span>Can I keep it private?</span>
+                <span class="accordion-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-item__panel" id="faq-panel-3" role="region" aria-labelledby="faq-tab-3" aria-hidden="true">
+              <div class="accordion-item__panel-inner"><p>Yes — a piece that Won can't post publicly costs an extra 50% of the base price.</p></div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-item__heading">
+              <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-tab-4">
+                <span>How many revisions do I get?</span>
+                <span class="accordion-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-item__panel" id="faq-panel-4" role="region" aria-labelledby="faq-tab-4" aria-hidden="true">
+              <div class="accordion-item__panel-inner"><p>5 free revisions at the sketch stage, with screenshots each time so you can point out what needs changing. Anything beyond that is $5–$30 depending on complexity.</p></div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-item__heading">
+              <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-tab-5">
+                <span>Do you do NSFW work?</span>
+                <span class="accordion-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-item__panel" id="faq-panel-5" role="region" aria-labelledby="faq-tab-5" aria-hidden="true">
+              <div class="accordion-item__panel-inner"><p>Only for clients 18+, and only as an add-on on the Illustration (Rendered) service. Everything else on this page is minor-friendly.</p></div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-item__heading">
+              <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="faq-panel-6" id="faq-tab-6">
+                <span>Can I get the source file?</span>
+                <span class="accordion-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-item__panel" id="faq-panel-6" role="region" aria-labelledby="faq-tab-6" aria-hidden="true">
+              <div class="accordion-item__panel-inner"><p>Yes — the .PSD source file is available for an extra 45% of the base price.</p></div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-item__heading">
+              <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="faq-panel-7" id="faq-tab-7">
+                <span>How do I actually request one?</span>
+                <span class="accordion-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-item__panel" id="faq-panel-7" role="region" aria-labelledby="faq-tab-7" aria-hidden="true">
+              <div class="accordion-item__panel-inner"><p>Pick a style in <a href="#commissions">Commissions</a> above and request it on VGen — or say hi on Discord first if you've got questions.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="faq__aside">
+          <!-- #20 pendiente: mini Won pensando -->
+          <figure class="art-slot art-slot--pending" data-slot="20">
+            <div class="art-slot__placeholder"><span class="art-slot__num">20</span><span class="art-slot__label">Mini Won pensando</span><span class="art-slot__hint">Arte pendiente · chibi con signo de pregunta</span></div>
+          </figure>
+          <div class="short-terms">
+            <h3 class="short-terms__title">The short version</h3>
+            <ul class="short-terms__list">
+              <li>Full payment upfront</li>
+              <li>Sketch approval is final</li>
+              <li>Personal use by default</li>
+              <li>Please credit @Wonffein</li>
+            </ul>
+            <a class="short-terms__link" href="#terms">Read the full terms →</a>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
   <!--
-    Términos de comisión. Texto real del ToS de VGen de Won (actualizado
-    23/01/2026), agrupado en 6 categorías dentro de un accordion — sección
-    con su propia composición (distinta a los tabs de About y a las cards
-    de Precios), como pidió Nezash. Contenido fiel al original (solo se
-    limpiaron errores de tipeo menores, no se cambió el sentido de ninguna
-    cláusula).
+    7 · TÉRMINOS. Texto real del ToS de VGen de Won (actualizado 23/01/2026), agrupado en
+    6 categorías dentro de un accordion. Contenido fiel al original.
   -->
-  <section id="terms" class="terms reveal">
-    <div class="ambient-blob ambient-blob--tr ambient-blob--pink" aria-hidden="true"></div>
-    <div class="ambient-blob ambient-blob--bl ambient-blob--violet" aria-hidden="true"></div>
+  <section id="terms" class="section section--lilac reveal">
     <div class="container">
-      <p class="section-eyebrow">✧ Commission Terms ✧</p>
+      <p class="section-eyebrow">Commission terms</p>
       <h2 class="section-title">Terms of Service</h2>
-      <p class="terms__intro">Updated Jan 23, 2026. Starting a commission means you've read and agree to these.</p>
+      <p class="terms__updated">Updated Jan 23, 2026. Starting a commission means you've read and agree to these.</p>
 
-      <div class="terms-accordion">
-        <div class="terms-item">
-          <h3 class="terms-item__heading">
-            <button type="button" class="terms-item__trigger" aria-expanded="false" aria-controls="terms-panel-0" id="terms-tab-0">
-              <span class="terms-item__title">General</span>
-              <span class="terms-item__icon" aria-hidden="true"></span>
+      <div class="accordion terms__list">
+        <div class="accordion-item">
+          <h3 class="accordion-item__heading">
+            <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="terms-panel-0" id="terms-tab-0">
+              <span>General</span>
+              <span class="accordion-item__icon" aria-hidden="true"></span>
             </button>
           </h3>
-          <div class="terms-item__panel" id="terms-panel-0" role="region" aria-labelledby="terms-tab-0" aria-hidden="true">
-            <div class="terms-item__panel-inner">
+          <div class="accordion-item__panel" id="terms-panel-0" role="region" aria-labelledby="terms-tab-0" aria-hidden="true">
+            <div class="accordion-item__panel-inner">
               <ul>
                 <li>You must be 18 or older to commission NSFW/+18 work. Everything else is minor-friendly.</li>
                 <li>Commissions are generally first come, first served.</li>
@@ -488,15 +673,15 @@
           </div>
         </div>
 
-        <div class="terms-item">
-          <h3 class="terms-item__heading">
-            <button type="button" class="terms-item__trigger" aria-expanded="false" aria-controls="terms-panel-1" id="terms-tab-1">
-              <span class="terms-item__title">Payments &amp; Refunds</span>
-              <span class="terms-item__icon" aria-hidden="true"></span>
+        <div class="accordion-item">
+          <h3 class="accordion-item__heading">
+            <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="terms-panel-1" id="terms-tab-1">
+              <span>Payments &amp; Refunds</span>
+              <span class="accordion-item__icon" aria-hidden="true"></span>
             </button>
           </h3>
-          <div class="terms-item__panel" id="terms-panel-1" role="region" aria-labelledby="terms-tab-1" aria-hidden="true">
-            <div class="terms-item__panel-inner">
+          <div class="accordion-item__panel" id="terms-panel-1" role="region" aria-labelledby="terms-tab-1" aria-hidden="true">
+            <div class="accordion-item__panel-inner">
               <ul>
                 <li>Full payment upfront.</li>
                 <li>Refunds follow VGen's refund policy.</li>
@@ -507,15 +692,15 @@
           </div>
         </div>
 
-        <div class="terms-item">
-          <h3 class="terms-item__heading">
-            <button type="button" class="terms-item__trigger" aria-expanded="false" aria-controls="terms-panel-2" id="terms-tab-2">
-              <span class="terms-item__title">Artwork Process</span>
-              <span class="terms-item__icon" aria-hidden="true"></span>
+        <div class="accordion-item">
+          <h3 class="accordion-item__heading">
+            <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="terms-panel-2" id="terms-tab-2">
+              <span>Artwork Process</span>
+              <span class="accordion-item__icon" aria-hidden="true"></span>
             </button>
           </h3>
-          <div class="terms-item__panel" id="terms-panel-2" role="region" aria-labelledby="terms-tab-2" aria-hidden="true">
-            <div class="terms-item__panel-inner">
+          <div class="accordion-item__panel" id="terms-panel-2" role="region" aria-labelledby="terms-tab-2" aria-hidden="true">
+            <div class="accordion-item__panel-inner">
               <ul>
                 <li>Starts with a sketch of the main idea.</li>
                 <li>Illustrations are usually 2000×2000px at 300dpi by default — let Won know if you want a different size or resolution.</li>
@@ -530,15 +715,15 @@
           </div>
         </div>
 
-        <div class="terms-item">
-          <h3 class="terms-item__heading">
-            <button type="button" class="terms-item__trigger" aria-expanded="false" aria-controls="terms-panel-3" id="terms-tab-3">
-              <span class="terms-item__title">Deadlines &amp; Delivery</span>
-              <span class="terms-item__icon" aria-hidden="true"></span>
+        <div class="accordion-item">
+          <h3 class="accordion-item__heading">
+            <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="terms-panel-3" id="terms-tab-3">
+              <span>Deadlines &amp; Delivery</span>
+              <span class="accordion-item__icon" aria-hidden="true"></span>
             </button>
           </h3>
-          <div class="terms-item__panel" id="terms-panel-3" role="region" aria-labelledby="terms-tab-3" aria-hidden="true">
-            <div class="terms-item__panel-inner">
+          <div class="accordion-item__panel" id="terms-panel-3" role="region" aria-labelledby="terms-tab-3" aria-hidden="true">
+            <div class="accordion-item__panel-inner">
               <ul>
                 <li>Delivery takes between 3 days and 2 months.</li>
                 <li>Any delays are communicated as soon as possible, through whichever platform you prefer.</li>
@@ -547,15 +732,15 @@
           </div>
         </div>
 
-        <div class="terms-item">
-          <h3 class="terms-item__heading">
-            <button type="button" class="terms-item__trigger" aria-expanded="false" aria-controls="terms-panel-4" id="terms-tab-4">
-              <span class="terms-item__title">Use &amp; Intellectual Property</span>
-              <span class="terms-item__icon" aria-hidden="true"></span>
+        <div class="accordion-item">
+          <h3 class="accordion-item__heading">
+            <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="terms-panel-4" id="terms-tab-4">
+              <span>Use &amp; Intellectual Property</span>
+              <span class="accordion-item__icon" aria-hidden="true"></span>
             </button>
           </h3>
-          <div class="terms-item__panel" id="terms-panel-4" role="region" aria-labelledby="terms-tab-4" aria-hidden="true">
-            <div class="terms-item__panel-inner">
+          <div class="accordion-item__panel" id="terms-panel-4" role="region" aria-labelledby="terms-tab-4" aria-hidden="true">
+            <div class="accordion-item__panel-inner">
               <ul>
                 <li>Illustrations are for your personal use only — you can't profit from them in any way.</li>
                 <li>Commercial usage is priced at 200% of the personal/non-commercial price.</li>
@@ -571,15 +756,15 @@
           </div>
         </div>
 
-        <div class="terms-item">
-          <h3 class="terms-item__heading">
-            <button type="button" class="terms-item__trigger" aria-expanded="false" aria-controls="terms-panel-5" id="terms-tab-5">
-              <span class="terms-item__title">Communication</span>
-              <span class="terms-item__icon" aria-hidden="true"></span>
+        <div class="accordion-item">
+          <h3 class="accordion-item__heading">
+            <button type="button" class="accordion-item__trigger" aria-expanded="false" aria-controls="terms-panel-5" id="terms-tab-5">
+              <span>Communication</span>
+              <span class="accordion-item__icon" aria-hidden="true"></span>
             </button>
           </h3>
-          <div class="terms-item__panel" id="terms-panel-5" role="region" aria-labelledby="terms-tab-5" aria-hidden="true">
-            <div class="terms-item__panel-inner">
+          <div class="accordion-item__panel" id="terms-panel-5" role="region" aria-labelledby="terms-tab-5" aria-hidden="true">
+            <div class="accordion-item__panel-inner">
               <ul>
                 <li>Available through Discord and VGen chat.</li>
                 <li>Discord: wonffein</li>
@@ -591,183 +776,30 @@
     </div>
   </section>
 
-  <!--
-    FAQ. No es contenido inventado: son las preguntas más obvias que
-    alguien se haría, resueltas con datos que ya están en Precios/Términos
-    (duración, reembolsos, uso comercial, privacidad, revisiones, NSFW,
-    cómo pedir, archivos .PSD) — la idea es no obligar a leer el ToS entero
-    para lo básico. Composición propia (grid de 2 columnas, no la lista de
-    un ancho fijo que ya se usó en Términos) para que no se sienta la
-    misma sección repetida.
-  -->
-  <section id="faq" class="faq reveal">
-    <div class="ambient-blob ambient-blob--tl ambient-blob--violet" aria-hidden="true"></div>
-    <div class="ambient-blob ambient-blob--br ambient-blob--pink" aria-hidden="true"></div>
+  <!-- 8 · CONTACTO — cierre cálido. Reusa el dibujo #3, no hace falta pedir uno nuevo -->
+  <section id="contact" class="section section--white reveal">
     <div class="container">
-      <p class="section-eyebrow">✧ Good To Know ✧</p>
-      <h2 class="section-title">FAQ</h2>
-      <p class="faq__intro">The short version of the commission terms — the full details are always in the <a href="#terms">Terms of Service</a> above.</p>
-
-      <div class="faq-grid">
-        <div class="faq-item">
-          <h3 class="faq-item__heading">
-            <button type="button" class="faq-item__trigger" aria-expanded="false" aria-controls="faq-panel-0" id="faq-tab-0">
-              <span class="faq-item__title">How long does a commission take?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
+      <div class="contact-card">
+        <figure class="art-slot art-slot--filled contact-card__art" data-slot="3">
+          <img src="assets/img/banner-love.png" alt="Illustration of Won with a big heart" loading="lazy">
+        </figure>
+        <div>
+          <h2 class="section-title">Ready to commission?</h2>
+          <p class="contact-card__text">The safest way is VGen. If you have questions first, say hi on Discord — she replies fastest there.</p>
+          <div class="contact-card__actions">
+            <a class="btn btn--primary" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer">Request on VGen</a>
+            <button type="button" class="btn btn--outline copy-handle" data-copy="wonffein">
+              <span class="copy-handle__text">Discord: wonffein</span>
+              <span class="copy-handle__icon" aria-hidden="true">⧉</span>
             </button>
-          </h3>
-          <div class="faq-item__panel" id="faq-panel-0" role="region" aria-labelledby="faq-tab-0" aria-hidden="true">
-            <div class="faq-item__panel-inner">
-              <p>Anywhere from 3 days to 2 months, depending on order and complexity. If it's running slower than expected, Won will reach out right away.</p>
-            </div>
           </div>
-        </div>
-
-        <div class="faq-item">
-          <h3 class="faq-item__heading">
-            <button type="button" class="faq-item__trigger" aria-expanded="false" aria-controls="faq-panel-1" id="faq-tab-1">
-              <span class="faq-item__title">Can I get a refund?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
-            </button>
-          </h3>
-          <div class="faq-item__panel" id="faq-panel-1" role="region" aria-labelledby="faq-tab-1" aria-hidden="true">
-            <div class="faq-item__panel-inner">
-              <p>Payment is full and upfront, and refunds follow VGen's refund policy. Make sure you're happy with the service and price before commissioning.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <h3 class="faq-item__heading">
-            <button type="button" class="faq-item__trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-tab-2">
-              <span class="faq-item__title">Can I use the art commercially?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
-            </button>
-          </h3>
-          <div class="faq-item__panel" id="faq-panel-2" role="region" aria-labelledby="faq-tab-2" aria-hidden="true">
-            <div class="faq-item__panel-inner">
-              <p>The listed price covers personal use. Commercial use (merch, direct profit) is 200% of the base price — stream-related use is generally fine at the personal rate.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <h3 class="faq-item__heading">
-            <button type="button" class="faq-item__trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-tab-3">
-              <span class="faq-item__title">Can I keep it private?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
-            </button>
-          </h3>
-          <div class="faq-item__panel" id="faq-panel-3" role="region" aria-labelledby="faq-tab-3" aria-hidden="true">
-            <div class="faq-item__panel-inner">
-              <p>Yes — a piece that Won can't post publicly costs an extra 50% of the base price.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <h3 class="faq-item__heading">
-            <button type="button" class="faq-item__trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-tab-4">
-              <span class="faq-item__title">How many revisions do I get?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
-            </button>
-          </h3>
-          <div class="faq-item__panel" id="faq-panel-4" role="region" aria-labelledby="faq-tab-4" aria-hidden="true">
-            <div class="faq-item__panel-inner">
-              <p>5 free revisions at the sketch stage, with screenshots each time so you can point out what needs changing. Anything beyond that is $5–$30 depending on complexity.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <h3 class="faq-item__heading">
-            <button type="button" class="faq-item__trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-tab-5">
-              <span class="faq-item__title">Do you do NSFW work?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
-            </button>
-          </h3>
-          <div class="faq-item__panel" id="faq-panel-5" role="region" aria-labelledby="faq-tab-5" aria-hidden="true">
-            <div class="faq-item__panel-inner">
-              <p>Only for clients 18+, and only as an add-on on the Illustration (Rendered) service. Everything else on this page is minor-friendly.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <h3 class="faq-item__heading">
-            <button type="button" class="faq-item__trigger" aria-expanded="false" aria-controls="faq-panel-6" id="faq-tab-6">
-              <span class="faq-item__title">Can I get the source file?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
-            </button>
-          </h3>
-          <div class="faq-item__panel" id="faq-panel-6" role="region" aria-labelledby="faq-tab-6" aria-hidden="true">
-            <div class="faq-item__panel-inner">
-              <p>Yes — the .PSD source file is available for an extra 45% of the base price.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <h3 class="faq-item__heading">
-            <button type="button" class="faq-item__trigger" aria-expanded="false" aria-controls="faq-panel-7" id="faq-tab-7">
-              <span class="faq-item__title">How do I actually request one?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
-            </button>
-          </h3>
-          <div class="faq-item__panel" id="faq-panel-7" role="region" aria-labelledby="faq-tab-7" aria-hidden="true">
-            <div class="faq-item__panel-inner">
-              <p>Pick a service in <a href="#pricing">Commission Prices</a> above and request it on VGen — or say hi on Discord first if you've got questions.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--
-    Contacto / cómo encargar. Sin formulario propio (no hay backend) — los
-    2 caminos reales que Won ya usa: VGen (para encargar formalmente) y
-    Discord (para preguntas antes de pedir). El hándle de Discord se puede
-    copiar con un click (navigator.clipboard) en vez de ser solo texto
-    suelto — pequeño detalle interactivo, no contenido nuevo.
-  -->
-  <section id="contacto" class="contact reveal">
-    <div class="ambient-blob ambient-blob--tr ambient-blob--pink" aria-hidden="true"></div>
-    <div class="embers" aria-hidden="true">
-      <span class="ember"></span>
-      <span class="ember"></span>
-      <span class="ember"></span>
-      <span class="ember"></span>
-      <span class="ember"></span>
-    </div>
-    <div class="container">
-      <p class="section-eyebrow">✧ Let's Talk ✧</p>
-      <h2 class="section-title">Ready to commission?</h2>
-      <p class="contact__intro">Two ways to reach Won — pick whichever fits what you need.</p>
-
-      <div class="contact-grid">
-        <div class="contact-card">
-          <span class="contact-card__icon" aria-hidden="true">✎</span>
-          <h3 class="contact-card__title">Commission on VGen</h3>
-          <p class="contact-card__text">Pick a service, fill in the request form, and Won takes it from there — this is the fastest way to actually start a piece.</p>
-          <a class="btn btn--primary contact-card__action" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer">Go to VGen</a>
-        </div>
-
-        <div class="contact-card">
-          <span class="contact-card__icon" aria-hidden="true">💬</span>
-          <h3 class="contact-card__title">Say hi on Discord</h3>
-          <p class="contact-card__text">Got questions before committing? Discord is Won's main social — same handle as everywhere else.</p>
-          <button type="button" class="contact-card__action contact-card__copy" data-copy="wonffein">
-            <span class="contact-card__copy-text">wonffein</span>
-            <span class="contact-card__copy-icon" aria-hidden="true">⧉</span>
-          </button>
         </div>
       </div>
     </div>
   </section>
 </main>
 
-<!-- Lightbox de la galería: un solo overlay compartido, se llena por JS. -->
+<!-- Visor de la galería: un solo overlay compartido, se llena por JS. -->
 <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Art viewer">
   <button type="button" class="lightbox__backdrop" data-close="true" aria-label="Close"></button>
   <div class="lightbox__content">
@@ -781,37 +813,29 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>&copy; <span id="year"></span> Wonffein</p>
+    <p class="footer-inner__brand">Wonffein</p>
 
-    <nav class="social-nav" aria-label="Redes sociales de Wonffein">
-      <a class="social-slot social-slot--small" data-platform="twitch" href="https://www.twitch.tv/wonffein" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitch</title><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg></span>
-        <span class="visually-hidden">Twitch</span>
-      </a>
-      <a class="social-slot social-slot--small" data-platform="vgen" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg viewBox="0 0 75 75" xmlns="http://www.w3.org/2000/svg"><title>VGen</title><g transform="translate(0,75) scale(0.1,-0.1)" fill="currentColor" stroke="none"><path d="M400 637 c-71 -23 -140 -120 -140 -197 0 -19 -4 -17 -32 18 -59 71 -111 89 -168 55 -34 -19 -50 -52 -50 -97 0 -73 186 -273 299 -321 47 -21 128 -18 179 5 55 25 152 117 203 193 46 70 51 120 18 182 -76 141 -189 200 -309 162z m148 -66 c50 -25 104 -102 104 -147 0 -43 -16 -68 -100 -154 -146 -148 -230 -146 -382 10 -90 91 -116 135 -96 165 28 43 52 32 149 -69 89 -91 127 -116 162 -102 12 4 8 15 -20 52 -41 53 -49 81 -42 134 14 105 127 161 225 111z"/><path d="M437 473 c-15 -15 -5 -63 19 -92 l26 -31 24 29 c29 34 31 62 6 84 -19 17 -63 23 -75 10z"/></g></svg></span>
-        <span class="visually-hidden">VGen</span>
-      </a>
-      <a class="social-slot social-slot--small" data-platform="instagram" href="https://www.instagram.com/wonffein" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span>
-        <span class="visually-hidden">Instagram</span>
-      </a>
-      <a class="social-slot social-slot--small" data-platform="x" href="https://x.com/Wonffein" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></span>
-        <span class="visually-hidden">X</span>
-      </a>
-      <a class="social-slot social-slot--small" data-platform="discord" href="https://discord.gg/p6C6hsVAs" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></span>
-        <span class="visually-hidden">Discord</span>
-      </a>
-      <a class="social-slot social-slot--small" data-platform="bluesky" href="https://bsky.app/profile/wonffein.bsky.social" target="_blank" rel="noopener noreferrer">
-        <span class="social-slot__icon" aria-hidden="true"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Bluesky</title><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg></span>
-        <span class="visually-hidden">Bluesky</span>
-      </a>
+    <nav class="social-nav social-nav--footer" aria-label="Redes sociales de Wonffein">
+      <a class="social-slot" href="https://www.twitch.tv/wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-twitch"/></svg><span class="visually-hidden">Twitch</span></a>
+      <a class="social-slot" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-vgen"/></svg><span class="visually-hidden">VGen</span></a>
+      <a class="social-slot" href="https://www.instagram.com/wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-instagram"/></svg><span class="visually-hidden">Instagram</span></a>
+      <a class="social-slot" href="https://x.com/Wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-x"/></svg><span class="visually-hidden">X</span></a>
+      <a class="social-slot" href="https://discord.gg/p6C6hsVAs" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-discord"/></svg><span class="visually-hidden">Discord</span></a>
+      <a class="social-slot" href="https://bsky.app/profile/wonffein.bsky.social" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-bluesky"/></svg><span class="visually-hidden">Bluesky</span></a>
     </nav>
+
+    <p class="footer-inner__credit">&copy; <span id="year"></span> Wonffein · All art made by Won</p>
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/nav-toggle.js"></script>
+<script src="js/facts-tabs.js"></script>
+<script src="js/gallery-filter.js"></script>
+<script src="js/lightbox.js"></script>
+<script src="js/accordion.js"></script>
+<script src="js/copy-handle.js"></script>
+<script src="js/recent-work-data.js"></script>
+<script src="js/recent-work.js"></script>
 </body>
 </html>
