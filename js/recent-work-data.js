@@ -2,6 +2,11 @@
 // Las 4 comisiones más recientes de VGen, de la más nueva a la más vieja.
 window.RECENT_WORK = [
   {
+    "img": "assets/recent/3d4bae44-f836-438e-b22f-e5af50215938.webp",
+    "url": "https://vgen.co/portfolio/3d4bae44-f836-438e-b22f-e5af50215938",
+    "alt": "Commission by Won: Halloween Sory"
+  },
+  {
     "img": "assets/recent/f2221e7b-fda0-43de-946b-43c9d187ed51.webp",
     "url": "https://vgen.co/portfolio/f2221e7b-fda0-43de-946b-43c9d187ed51",
     "alt": "Commission by Won: saikoro's Charles"
@@ -15,10 +20,5 @@ window.RECENT_WORK = [
     "img": "assets/recent/ac74c8c1-38ff-4392-89dd-d86c95cc51f0.webp",
     "url": "https://vgen.co/portfolio/ac74c8c1-38ff-4392-89dd-d86c95cc51f0",
     "alt": "Commission by Won: NeonMaddie's priDEMONth Chiicon"
-  },
-  {
-    "img": "assets/recent/be089e8b-210e-4adb-96ca-b4a4dfd245c2.webp",
-    "url": "https://vgen.co/portfolio/be089e8b-210e-4adb-96ca-b4a4dfd245c2",
-    "alt": "Commission by Won: Nico's Discord Stamp"
   }
 ];
