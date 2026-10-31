@@ -106,3 +106,8 @@ El título "Ready to commission?" es la excepción: letra Outfit (sans firme), c
 ## Filas que se abren (FAQ y términos)
 `css/accordion.css`: halo lila suave en la fila abierta y el ícono "+" que da media vuelta y pasa a degradado rosa → violeta. Sin movimiento constante.
 
+## Ícono y vista previa al compartir
+- **Ícono de la pestaña:** la cabra pixelada. `favicon.ico` (en la raíz), `assets/img/favicon-32.png` y `assets/img/apple-touch-icon.png` (iPhone, con fondo morado).
+- **Imagen al compartir el enlace:** `assets/img/share-card.jpg` (1200×630, Won chibi sobre el atardecer). Se declara con las etiquetas `og:` y `twitter:` del `<head>` de `index.html`; sus direcciones son absolutas (`https://nezash.github.io/WonffeinPage/...`), hay que actualizarlas si cambia el dominio.
+- Discord, X y WhatsApp guardan en caché la vista previa: si la cambias, usa su depurador (por ejemplo el Card Validator de X o el Sharing Debugger de Facebook) o pega el enlace con `?v=2` al final.
+
