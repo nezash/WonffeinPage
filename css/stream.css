@@ -1,36 +1,97 @@
-/* Tarjetas "Is she live?" y "Come hang out" (horario), una al lado de la otra. */
+/* Escenario de Twitch: una sola tarjeta centrada con el reproductor arriba y "Come hang out" (cómo seguirla) abajo.
+   La forma y las letras van aquí; el fuego, los cuernos, las chispas y los brillos están en css/stream-fx.css. */
 
 .live-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 28px;
   margin-top: 56px;
 }
 
+.live-stage {
+  --font-stage-title: "Pirata One", "Gloock", Georgia, serif;
+  --font-stage-ui: "Bungee", "Jost", system-ui, sans-serif;
+  --font-stage-mono: "VT323", ui-monospace, "Courier New", monospace;
+  --pink: #ff8fcf;
+
+  position: relative;
+  max-width: 1040px;
+  margin: 250px auto 0; /* arriba queda lugar para los cuernos que asoman, sin chocar con lo de arriba */
+}
+
 .live-card {
-  padding: 26px;
-  border: 2px solid var(--line);
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin-inline: auto;
+  padding: 36px 30px 30px;
   border-radius: var(--radius-lg);
-  background: var(--surface);
+  text-align: center;
 }
 
-.live-card__title {
-  margin: 14px 0 6px;
-  font-size: 30px;
-}
-
-.live-card__text {
-  font-size: 15px;
+/* Etiqueta de la cámara (REC / apagada): centrada arriba; el color y las animaciones están en css/stream-fx.css */
+.live-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 16px 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(15, 7, 32, 0.45);
+  font-family: var(--font-stage-ui);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--ink-soft);
 }
 
+.live-card__cam {
+  width: 22px;
+  height: 22px;
+  flex: none;
+}
+
+.live-card__status-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Sin respuesta de Twitch: no se muestra una etiqueta que podría mentir */
+.live-stage[data-live="unknown"] .live-card__status {
+  display: none;
+}
+
+/* Título: otra letra (gótica), grande y centrada */
+.live-card__title {
+  margin: 14px 0 8px;
+  font-family: var(--font-stage-title);
+  font-size: clamp(46px, 8vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.live-card__text {
+  max-width: 520px;
+  margin-inline: auto;
+  font-family: var(--font-stage-mono);
+  font-size: 22px;
+  line-height: 1.1;
+  color: var(--ink-soft);
+}
+
+/* Reproductor (monitor): el marco y las líneas van encima, sin tapar los clics */
 .stream-embed {
   position: relative;
-  margin-top: 16px;
+  margin-top: 22px;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--bg-lilac);
+}
+
+.stream-embed__player {
+  position: absolute;
+  inset: 0;
 }
 
 .stream-embed iframe {
@@ -41,12 +102,114 @@
   border: 0;
 }
 
-.live-card__cta {
-  margin-top: 16px;
+.stream-embed__scan,
+.stream-embed__frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-@media (max-width: 900px) {
+/* Parte de abajo: otro color y otras letras (Bungee en rosa para el título, VT323 para el texto) */
+.live-card__follow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 22px;
+  margin-top: 26px;
+  padding: 18px 22px;
+  border: 1px dashed rgba(255, 143, 207, 0.5);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(109, 51, 201, 0.4), rgba(255, 79, 163, 0.16));
+  text-align: left;
+}
+
+.live-card__mini {
+  position: relative;
+  flex: none;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+}
+
+.live-card__mini img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface);
+  border: 3px solid var(--surface);
+}
+
+.live-card__follow-text {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.live-card__subtitle {
+  margin: 0;
+  font-family: var(--font-stage-ui);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--pink);
+}
+
+.live-card__chat {
+  margin-top: 4px;
+  font-family: var(--font-stage-mono);
+  font-size: 21px;
+  line-height: 1.1;
+  color: #f1def9;
+}
+
+.live-follow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-family: var(--font-stage-ui);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+}
+
+.live-follow svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+@media (max-width: 700px) {
   .live-row {
-    grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
+
+  .live-stage {
+    margin-top: 140px;
+  }
+
+  .live-card {
+    padding: 28px 18px 22px;
+  }
+
+  .live-card__text {
+    font-size: 20px;
+  }
+
+  .live-card__follow {
+    flex-direction: column;
+    padding: 18px 16px;
+    text-align: center;
+  }
+
+  .live-card__follow-text {
+    flex: none;
   }
 }

@@ -1,24 +1,146 @@
-/* Cierre cálido: tarjeta rosa con el dibujo de Won con el corazón y dos formas de escribirle. */
+/* Cierre de la página: la tarjeta de pedir una comisión. Tiene que entenderse sin leer: dibujo grande, sello "Order here!",
+   tres pasos cortos y un botón enorme a VGen. Los colores y animaciones están en css/contact-fx.css. */
 
 .contact-card {
+  position: relative;
   display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
+  grid-template-columns: 340px minmax(0, 1fr);
   align-items: center;
-  gap: 48px;
-  padding: 40px 52px;
-  border: 2px solid var(--accent-line);
+  gap: 56px;
+  padding: 52px 60px;
+  border: 3px solid var(--accent-line);
   border-radius: var(--radius-xl);
   background: var(--bg-tint);
 }
 
+.contact-card__art-wrap {
+  position: relative;
+  z-index: 1;
+}
+
 .contact-card__art {
+  border: 6px solid #fff;
   border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+/* Sello redondo que dice "Order here!" */
+.contact-card__stamp {
+  position: absolute;
+  top: -26px;
+  right: -30px;
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  font-family: "Bungee", "Jost", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.contact-card__body {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+/* Título propio de esta tarjeta: sin raya y con una letra sans limpia y firme (Outfit). Todo el título lleva un solo degradado
+   (rosa claro → rosa fuerte → violeta) para que "Ready to" no desentone con el resto de la tarjeta */
+.contact-card__body .section-title.contact-card__title {
+  font-family: "Outfit", "Jost", system-ui, sans-serif;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  background: linear-gradient(100deg, #ffd6ef 0%, #ff9fd8 40%, #ff6fc0 62%, #b868ff 100%);
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 12px rgba(255, 95, 182, 0.4));
+  animation: none;
+}
+
+.contact-card__body .section-title.contact-card__title::after {
+  display: none;
+}
+
+/* Tres pasos en fila, de un vistazo */
+.contact-card__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-card__steps li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 16px 7px 8px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.contact-card__steps li span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Botón enorme: es lo primero que se ve */
+.contact-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 520px;
+  min-height: 76px;
+  margin-top: 26px;
+  padding: 0 30px;
+  border-radius: 999px;
+  font-family: "Bungee", "Jost", system-ui, sans-serif;
+  font-size: clamp(15px, 4.2vw, 25px);
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+}
+
+.contact-cta__icon {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+.contact-cta__arrow {
+  flex: none;
+  width: 28px;
+  height: 28px;
 }
 
 .contact-card__text {
-  margin-top: 12px;
+  margin-top: 20px;
   max-width: 520px;
-  font-size: 18px;
+  font-size: 17px;
   color: var(--ink-soft);
 }
 
@@ -26,7 +148,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 26px;
+  margin-top: 16px;
 }
 
 .copy-handle__icon {
@@ -41,11 +163,42 @@
 @media (max-width: 900px) {
   .contact-card {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 32px 26px;
+    gap: 40px;
+    padding: 40px 24px 32px;
   }
 
-  .contact-card__art {
-    max-width: 260px;
+  .contact-card__art-wrap {
+    width: min(100%, 270px);
+    margin-inline: auto;
+  }
+
+  .contact-card__stamp {
+    top: -24px;
+    right: -26px;
+    width: 96px;
+    height: 96px;
+    font-size: 14px;
+  }
+
+  .contact-card__body {
+    text-align: center;
+  }
+
+
+
+  .contact-card__steps,
+  .contact-card__actions {
+    justify-content: center;
+  }
+
+  .contact-cta {
+    max-width: none;
+    gap: 10px;
+    min-height: 68px;
+    padding: 0 16px;
+  }
+
+  .contact-card__text {
+    margin-inline: auto;
   }
 }

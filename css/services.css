@@ -13,16 +13,72 @@
   flex-direction: column;
   gap: 14px;
   padding: 20px;
-  border: 2px solid var(--line);
+  border: 2px solid transparent;
   border-radius: var(--radius-lg);
-  background: var(--surface);
+  /* capa 1: el relleno de la tarjeta; capa 2: el color del borde (en reposo liso, al pasar el mouse se anima) */
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(var(--line), var(--line)) border-box;
   container-type: inline-size; /* el título se ajusta al ancho de SU tarjeta, no al de la pantalla */
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
-.service-card:hover {
+/* Al pasar el mouse: el borde brilla entre morado y rosado como una llama (los colores suben en movimiento)
+   y un halo corto del mismo color parpadea alrededor. Sin partículas: solo colores en movimiento. */
+.service-card:hover,
+.service-card:focus-within {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-soft);
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(
+        0deg,
+        #6d33c9 0%,
+        #a24dff 22%,
+        #ff4fa3 48%,
+        #ff9ad0 62%,
+        #c255ff 82%,
+        #6d33c9 100%
+      )
+      border-box;
+  background-size: auto, 100% 220px;
+  background-repeat: no-repeat, repeat-y;
+  animation:
+    flame-flow 2.2s linear infinite,
+    flame-glow 1.3s ease-in-out infinite alternate;
+}
+
+/* Un ciclo exacto de la altura del degradado (220px) para que no se note el salto al repetir */
+@keyframes flame-flow {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 0 0, 0 -220px;
+  }
+}
+
+/* Halo pegado a la tarjeta (sin desplazamiento, así no se va a los costados) que cambia entre morado y rosado */
+@keyframes flame-glow {
+  0% {
+    box-shadow: 0 0 10px 1px rgba(162, 77, 255, 0.55), 0 0 22px 2px rgba(109, 51, 201, 0.35);
+  }
+
+  45% {
+    box-shadow: 0 0 12px 2px rgba(255, 79, 163, 0.6), 0 0 24px 3px rgba(194, 85, 255, 0.35);
+  }
+
+  100% {
+    box-shadow: 0 0 9px 1px rgba(255, 140, 198, 0.5), 0 0 20px 2px rgba(162, 77, 255, 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card:hover,
+  .service-card:focus-within {
+    animation: none;
+    box-shadow: 0 0 12px 2px rgba(194, 85, 255, 0.5);
+  }
 }
 
 .service-card .art-slot {

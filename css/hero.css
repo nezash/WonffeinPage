@@ -1,13 +1,24 @@
 /* Portada: Won primero (texto a la izquierda, su dibujo grande dentro de un círculo a la derecha). */
 
 .hero {
-  padding: 150px 0 110px; /* arriba queda lugar para los cuernos */
+  padding: 100px 0 120px; /* arriba queda lugar para los cuernos (no deben chocar con el menú); abajo, el color llega hasta el difuminado de 55px */
   overflow: hidden;
   color: var(--on-night);
-  /* morado profundo arriba, más claro abajo; un brillo suave detrás del dibujo */
+  background: var(--scrim); /* el borde de abajo se difumina hasta este velo, igual que la sección que sigue */
+}
+
+/* Portada sólida arriba (el fondo de pantalla no se ve en el inicio); solo el borde de abajo se difumina
+   para que el atardecer aparezca de a poco. El fondo va en ::before para que la máscara no toque el contenido. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background:
     radial-gradient(circle at 78% 42%, rgba(155, 114, 232, 0.38), transparent 52%),
     linear-gradient(170deg, var(--night) 0%, var(--night-2) 58%, var(--night-3) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 55px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 55px), transparent);
 }
 
 .hero :focus-visible {
@@ -21,11 +32,49 @@
   gap: 56px;
 }
 
+/* Título del hero: letra propia (Ceviche One, trazo de pincel áspero) y degradado rosa fuerte a violeta con un destello que lo cruza.
+   Nadie más en la página usa esta letra ni estos colores. */
 .hero__title {
   margin-top: 18px;
-  font-size: clamp(52px, 8vw, 86px);
-  line-height: 0.98;
-  color: #fff;
+  font-family: "Ceviche One", "Gloock", Georgia, serif;
+  font-size: clamp(52px, 7.6vw, 84px);
+  font-weight: 400;
+  line-height: 1.12;
+  background: linear-gradient(100deg, #ffffff 0%, #ffc2e6 22%, #ff5fb6 45%, #b45cff 70%, #ffffff 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation:
+    hero-title-shine 6s ease-in-out infinite alternate,
+    hero-title-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes hero-title-shine {
+  from {
+    background-position: 0% 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes hero-title-glow {
+  from {
+    filter: drop-shadow(0 0 8px rgba(255, 95, 182, 0.45));
+  }
+
+  to {
+    filter: drop-shadow(0 0 18px rgba(180, 92, 255, 0.7));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title {
+    animation: none;
+  }
 }
 
 .hero__tagline {
@@ -48,7 +97,7 @@
 
 .hero__art {
   position: relative;
-  width: min(100%, 470px);
+  width: min(100%, 360px);
   aspect-ratio: 1 / 1;
   margin-inline: auto;
 }
@@ -104,7 +153,7 @@
   }
 
   .hero__art {
-    width: min(100%, 380px);
+    width: min(100%, 300px);
     order: -1;
   }
 

@@ -1,0 +1,23 @@
+/* Fondo de pantalla de toda la página: atardecer morado y rosa, fijo (no se mueve al hacer scroll).
+   Las secciones lo dejan ver con un velo oscuro (--scrim); las secciones lilas son sólidas y lo tapan.
+   Es un div fijo y no "background-attachment: fixed" porque ese no funciona bien en celulares. */
+
+body {
+  background: var(--bg);
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--night) url("../assets/img/fondo-atardecer.jpg") center / cover no-repeat;
+  pointer-events: none;
+}
+
+/* Un poco de oscuridad extra para que el fondo no compita con los dibujos */
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(30, 14, 54, 0.12), rgba(24, 10, 44, 0.34));
+}

@@ -1,19 +1,56 @@
 /* Estructura común de cada sección: franja de fondo, etiqueta chica, título y texto de apoyo. */
 
+/* Fondo de cada sección en ::before. Las que usan el velo transparente (--scrim) van completas, sin difuminar.
+   Las de color sólido (--tint y --lilac) llevan el borde de arriba y de abajo difuminado con una máscara, así el fondo de
+   pantalla se asoma entre secciones; por eso tienen 20px más de padding, para que el difuminado no se coma el contenido. */
 .section {
+  --fade: 50px;
+  --section-bg: var(--scrim); /* deja ver el fondo de pantalla (css/page-bg.css) con un velo oscuro */
+  position: relative;
+  isolation: isolate;
   padding: 84px 0;
 }
 
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--section-bg);
+}
+
 .section--white {
-  background: var(--bg);
+  --section-bg: var(--scrim);
+}
+
+.section--tint,
+.section--lilac {
+  padding: 104px 0;
+}
+
+/* Base: el mismo velo de las secciones transparentes, para que el difuminado termine en ese velo y no se marque una línea con las vecinas */
+.section--tint::before,
+.section--lilac::before {
+  background: var(--scrim);
+}
+
+.section--tint::after,
+.section--lilac::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--section-bg);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
 }
 
 .section--tint {
-  background: var(--bg-tint);
+  --section-bg: var(--bg-tint);
 }
 
 .section--lilac {
-  background: var(--bg-lilac);
+  --section-bg: var(--bg-lilac);
 }
 
 .section-eyebrow {
@@ -39,6 +76,12 @@
 
 @media (max-width: 700px) {
   .section {
+    --fade: 32px;
     padding: 60px 0;
+  }
+
+  .section--tint,
+  .section--lilac {
+    padding: 80px 0;
   }
 }

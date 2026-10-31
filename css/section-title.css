@@ -1,0 +1,66 @@
+/* Títulos de sección (h2.section-title) con color y estilo propios.
+   Misma letra, mismos colores (--t1, --t2, --t3) y mismo efecto en todos.
+   El título del hero (hero.css) y el del stream (stream.css) tienen letra y colores propios: estos no se parecen a ellos. */
+
+/* Un solo juego de colores para todos los títulos de sección: blanco rosado → rosa → violeta (sin azules) */
+.section {
+  --t1: #fff0fa;
+  --t2: #ff9fd8;
+  --t3: #9d6bff;
+}
+
+.section-eyebrow {
+  color: var(--t2, var(--lilac-dark));
+}
+
+/* Texto con degradado que se desliza muy despacio + brillo suave del color de la sección */
+.section-title {
+  width: fit-content;
+  max-width: 100%;
+  background: linear-gradient(100deg, var(--t1, #fff) 0%, var(--t2, #d6b8ff) 45%, var(--t3, #a06bff) 70%, var(--t1, #fff) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--t3, #a06bff) 45%, transparent));
+  animation: title-slide 9s ease-in-out infinite alternate;
+}
+
+/* Raya de colores debajo del título: crece cuando la sección aparece en pantalla */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 5px;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--t2, #d6b8ff), var(--t3, #a06bff));
+  transition: width 0.7s ease 0.2s;
+}
+
+.reveal.is-visible .section-title::after,
+.section-title:hover::after {
+  width: 130px;
+}
+
+@keyframes title-slide {
+  from {
+    background-position: 0% 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-title {
+    animation: none;
+  }
+
+  .section-title::after {
+    transition: none;
+    width: 130px;
+  }
+}

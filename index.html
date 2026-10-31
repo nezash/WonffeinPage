@@ -14,16 +14,18 @@
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Gloock&family=Jost:wght@400;500;600;700&family=Ceviche+One&family=Outfit:wght@800&family=Pirata+One&family=VT323&display=swap" rel="stylesheet">
 
 <!-- Un CSS por componente -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/section.css">
+<link rel="stylesheet" href="css/section-title.css">
 <link rel="stylesheet" href="css/button.css">
 <link rel="stylesheet" href="css/chip.css">
 <link rel="stylesheet" href="css/art-slot.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/social.css">
+<link rel="stylesheet" href="css/page-bg.css">
 <link rel="stylesheet" href="css/hero.css">
 <link rel="stylesheet" href="css/hero-bg.css">
 <link rel="stylesheet" href="css/gallery.css">
@@ -33,17 +35,19 @@
 <link rel="stylesheet" href="css/process.css">
 <link rel="stylesheet" href="css/about.css">
 <link rel="stylesheet" href="css/stream.css">
-<link rel="stylesheet" href="css/schedule.css">
+<link rel="stylesheet" href="css/stream-fx.css">
 <link rel="stylesheet" href="css/accordion.css">
 <link rel="stylesheet" href="css/faq.css">
 <link rel="stylesheet" href="css/terms.css">
 <link rel="stylesheet" href="css/contact.css">
+<link rel="stylesheet" href="css/contact-fx.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/reveal.css">
 
 <script src="js/main.js"></script>
 </head>
 <body>
+  <div class="page-bg" aria-hidden="true"></div>
 
 <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
   <symbol id="icon-twitch" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></symbol>
@@ -107,11 +111,11 @@
         <p class="hero__tagline">A demon goat artist from Colombia. I stream my journey to becoming a professional digital artist, drawing detailed OCs and gaming (badly) in between.</p>
 
         <div class="hero__actions">
-          <a class="btn btn--primary" href="#gallery">See her art</a>
+          <a class="btn btn--primary" href="#gallery">See my art</a>
           <a class="btn btn--outline" href="#commissions">Ask for a drawing</a>
         </div>
 
-        <nav class="social-nav hero__socials" aria-label="Wonffein's social links">
+        <nav class="social-nav hero__socials" aria-label="My social links">
           <a class="social-slot" href="https://www.twitch.tv/wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-twitch"/></svg><span class="visually-hidden">Wonffein on Twitch</span></a>
           <a class="social-slot" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-vgen"/></svg><span class="visually-hidden">Wonffein on VGen (commissions)</span></a>
           <a class="social-slot" href="https://www.instagram.com/wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-instagram"/></svg><span class="visually-hidden">Wonffein on Instagram</span></a>
@@ -127,10 +131,10 @@
         <div class="hero__ring" aria-hidden="true"></div>
         <!-- Dibujo #1 (ya existe). Mejora futura: Won a medio cuerpo. -->
         <div class="hero__avatar" data-slot="1">
-          <img src="assets/img/avatar-wave.png" alt="Illustration of Won waving hello">
+          <img src="assets/img/avatar-wave.png" alt="Me waving hello">
         </div>
         <!-- Dibujo #2 (ya existe): sticker que flota en la esquina -->
-        <img class="hero__sticker" data-slot="2" src="assets/img/emote-sparkle.png" alt="Won with sparkles in her eyes">
+        <img class="hero__sticker" data-slot="2" src="assets/img/emote-sparkle.png" alt="Me with sparkles in my eyes">
       </div>
     </div>
   </section>
@@ -139,8 +143,8 @@
   <section id="gallery" class="section section--white reveal">
     <div class="container">
       <p class="section-eyebrow">Gallery</p>
-      <h2 class="section-title">A peek at her art</h2>
-      <p class="section-intro">Hand-picked pieces. More get added as she makes them.</p>
+      <h2 class="section-title">A peek at my art</h2>
+      <p class="section-intro">Hand-picked pieces. More get added as I make them.</p>
 
       <div class="chip-row gallery-filters" role="group" aria-label="Filter the gallery">
         <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
@@ -166,7 +170,7 @@
         <!-- #3 (ya existe) -->
         <li class="gallery-item" data-category="chibis">
           <button type="button" class="gallery-item__trigger">
-            <img src="assets/img/banner-love.png" alt="Illustration of Won with a big heart" loading="lazy">
+            <img src="assets/img/banner-love.png" alt="Me with a big heart" loading="lazy">
             <span class="gallery-item__caption visually-hidden">Sending some love</span>
           </button>
         </li>
@@ -186,7 +190,7 @@
         <!-- #4 (ya existe) -->
         <li class="gallery-item" data-category="emotes">
           <button type="button" class="gallery-item__trigger">
-            <img src="assets/img/lurk-screen.png" alt="Won's stream lurk screen illustration" loading="lazy">
+            <img src="assets/img/lurk-screen.png" alt="My stream lurk screen illustration" loading="lazy">
             <span class="gallery-item__caption visually-hidden">Lurk mode</span>
           </button>
         </li>
@@ -242,7 +246,7 @@
         <li class="gallery-item" data-category="always">
           <div class="gallery-more">
             <h3 class="gallery-more__title">Want to see more?</h3>
-            <p class="gallery-more__text">Everything else lives on her Instagram and X.</p>
+            <p class="gallery-more__text">Everything else lives on my Instagram and X.</p>
             <a class="btn btn--outline btn--small" href="https://www.instagram.com/wonffein" target="_blank" rel="noopener noreferrer">Open Instagram</a>
           </div>
         </li>
@@ -255,7 +259,7 @@
     <div class="container">
       <p class="section-eyebrow">Commissions</p>
       <h2 class="section-title">Want something drawn just for you?</h2>
-      <p class="section-intro">Pick a style, tell Won your idea, and she sketches it with you step by step. Every commission goes request → sketch approval → WIPs → final file.</p>
+      <p class="section-intro">Pick a style, tell me your idea, and I'll sketch it with you step by step. Every commission goes request → sketch approval → WIPs → final file.</p>
 
       <!--
         Datos reales copiados de los 3 servicios activos en VGen (Chibi Icon, Chibi Discord Stamp,
@@ -352,7 +356,7 @@
               <li>Background +20–40% (depends on complexity)</li>
             </ul>
           </details>
-          <p class="service-card__note">Discord is the fastest way to reach her with questions — @Wonffein.</p>
+          <p class="service-card__note">Discord is the fastest way to reach me with questions — @Wonffein.</p>
           <a class="btn btn--outline" href="https://vgen.co/Wonffein/service/rendered-/ccbdbfab-9ae2-476d-b2c7-e5cdcdb7f2f1" target="_blank" rel="noopener noreferrer">Ask for this on VGen</a>
         </li>
       </ul>
@@ -366,7 +370,7 @@
       <div class="recent-work">
         <div class="recent-work__intro">
           <h3 class="recent-work__title">Made for lovely clients</h3>
-          <p class="recent-work__text">A few of her latest commissions.</p>
+          <p class="recent-work__text">A few of my latest commissions.</p>
         </div>
         <figure class="art-slot art-slot--pending" data-slot="14a">
           <div class="art-slot__placeholder"><span class="art-slot__num">14</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg><span class="art-slot__label">Comisión 1</span></div>
@@ -398,7 +402,7 @@
           </figure>
           <span class="chip chip--accent">Step 1</span>
           <h3 class="step__title">Send your idea</h3>
-          <p class="step__text">Request on VGen or message her on Discord.</p>
+          <p class="step__text">Request on VGen or message me on Discord.</p>
         </li>
         <li class="step">
           <!-- #16 pendiente -->
@@ -416,7 +420,7 @@
           </figure>
           <span class="chip chip--accent">Step 3</span>
           <h3 class="step__title">Watch it come alive</h3>
-          <p class="step__text">She sends WIPs while she colours and renders.</p>
+          <p class="step__text">I send WIPs while I colour and render.</p>
         </li>
         <li class="step">
           <!-- #18 pendiente -->
@@ -449,11 +453,11 @@
 
         <div class="about__text">
           <p class="section-eyebrow">About</p>
-          <h2 class="section-title">Who's Won?</h2>
-          <p class="section-intro">Behind the screen is Won, a demon goat artist and streamer from Colombia, chasing the goal of going pro one stream at a time.</p>
+          <h2 class="section-title">Who am I?</h2>
+          <p class="section-intro">Behind the screen is me, Won — a demon goat artist and streamer from Colombia, chasing the goal of going pro one stream at a time.</p>
 
-          <div class="chip-row about__tabs" role="tablist" aria-label="Get to know Won — topics">
-            <button type="button" class="chip fact-tab is-active" role="tab" aria-selected="true" aria-controls="fact-0" data-target="fact-0">Who is she?</button>
+          <div class="chip-row about__tabs" role="tablist" aria-label="Get to know me — topics">
+            <button type="button" class="chip fact-tab is-active" role="tab" aria-selected="true" aria-controls="fact-0" data-target="fact-0">Who am I?</button>
             <button type="button" class="chip fact-tab" role="tab" aria-selected="false" aria-controls="fact-1" data-target="fact-1">The goal</button>
             <button type="button" class="chip fact-tab" role="tab" aria-selected="false" aria-controls="fact-2" data-target="fact-2">Art style</button>
             <button type="button" class="chip fact-tab" role="tab" aria-selected="false" aria-controls="fact-3" data-target="fact-3">Games</button>
@@ -462,11 +466,11 @@
           </div>
 
           <div class="about__stage">
-            <p class="fact-content is-active" id="fact-0" role="tabpanel">Behind the screen is Won — a demon goat artist and streamer making her way from Colombia. Won or Wonffein, same name everywhere.</p>
-            <p class="fact-content" id="fact-1" role="tabpanel">Chasing the goal of going pro as a digital artist, one stream at a time.</p>
-            <p class="fact-content" id="fact-2" role="tabpanel">Loves drawing OCs, obsessing over details, and experimenting — on stream and sometimes IRL too.</p>
-            <p class="fact-content" id="fact-3" role="tabpanel">League of Legends, Genshin Impact (mostly spent wandering around Teyvat), Honkai: Star Rail, and any indie game that catches her eye — never claiming to be good at any of them.</p>
-            <p class="fact-content" id="fact-4" role="tabpanel">Spends most of her streams working on art — and doing her best to hold a conversation at the same time. A little bit of an airhead, always working on it.</p>
+            <p class="fact-content is-active" id="fact-0" role="tabpanel">Behind the screen is me — Won, a demon goat artist and streamer making my way from Colombia. Won or Wonffein, same name everywhere.</p>
+            <p class="fact-content" id="fact-1" role="tabpanel">I'm chasing the goal of going pro as a digital artist, one stream at a time.</p>
+            <p class="fact-content" id="fact-2" role="tabpanel">I love drawing OCs, obsessing over details, and experimenting — on stream and sometimes IRL too.</p>
+            <p class="fact-content" id="fact-3" role="tabpanel">League of Legends, Genshin Impact (mostly spent wandering around Teyvat), Honkai: Star Rail, and any indie game that catches my eye — never claiming to be good at any of them.</p>
+            <p class="fact-content" id="fact-4" role="tabpanel">I spend most of my streams working on art — and doing my best to hold a conversation at the same time. A little bit of an airhead, always working on it.</p>
             <p class="fact-content" id="fact-5" role="tabpanel">Same handle on every platform — feel free to reach out any time, Discord included.</p>
           </div>
         </div>
@@ -479,34 +483,59 @@
           Hoy: https://nezash.github.io/WonffeinPage/ → parent=nezash.github.io (solo el hostname).
           Se deja parent=localhost para probar en local. Si algún día hay dominio propio, sumar otro &parent=.
         -->
-        <div class="live-card" id="stream">
-          <span class="chip chip--accent">Right now</span>
-          <h3 class="live-card__title">Is she live?</h3>
-          <p class="live-card__text">Updates on its own — live when she's streaming, or her latest videos when she's not.</p>
-          <div class="stream-embed">
-            <iframe
-              src="https://player.twitch.tv/?channel=wonffein&amp;parent=nezash.github.io&amp;parent=localhost&amp;muted=true"
-              allowfullscreen
-              loading="lazy"
-              title="Wonffein's Twitch stream"
-            ></iframe>
+        <div class="live-stage">
+          <!-- Decoración del escenario (todo aria-hidden): cuernos asomando detrás de la card y chispas que suben por los lados -->
+          <img class="live-stage__horns" src="assets/img/cuernos.png" alt="" aria-hidden="true">
+          <div class="live-stage__embers" aria-hidden="true">
+            <i style="--x:-5%;--s:6px;--d:11s;--w:-3.6s;--dx:-30px"></i>
+            <i style="--x:2%;--s:4px;--d:9s;--w:-3.3s;--dx:-30px"></i>
+            <i style="--x:9%;--s:5px;--d:9s;--w:-0.8s;--dx:10px"></i>
+            <i style="--x:20%;--s:4px;--d:11s;--w:-0.8s;--dx:10px"></i>
+            <i style="--x:35%;--s:4px;--d:9s;--w:-8.5s;--dx:34px"></i>
+            <i style="--x:50%;--s:4px;--d:15s;--w:-0.4s;--dx:-18px"></i>
+            <i style="--x:65%;--s:4px;--d:11s;--w:-2.6s;--dx:-18px"></i>
+            <i style="--x:80%;--s:4px;--d:13s;--w:-5.0s;--dx:34px"></i>
+            <i style="--x:92%;--s:5px;--d:9s;--w:-5.2s;--dx:34px"></i>
+            <i style="--x:99%;--s:5px;--d:13s;--w:-0.9s;--dx:34px"></i>
+            <i style="--x:106%;--s:4px;--d:9s;--w:-5.6s;--dx:10px"></i>
           </div>
-          <a class="btn btn--outline btn--small live-card__cta" href="https://twitch.tv/Wonffein" target="_blank" rel="noopener noreferrer">Open on Twitch</a>
-        </div>
 
-        <!-- Horario: Won transmite casi todos los días, pero a horas distintas. Por eso no hay tabla de horas fijas;
-             se manda a la página de horario de Twitch, que ella actualiza. -->
-        <div class="live-card" id="schedule">
-          <span class="chip chip--accent">Stream schedule</span>
-          <h3 class="live-card__title">Come hang out</h3>
-          <p class="live-card__text">Won streams almost every day, just not always at the same hour. Follow her on Twitch and you'll get a ping when she goes live.</p>
-          <ul class="day-pills" aria-label="Won streams on most days of the week">
-            <li>Mon</li><li>Tue</li><li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li><li>Sun</li>
-          </ul>
-          <p class="schedule__note">Hours change from day to day.</p>
-          <div class="schedule__actions">
-            <a class="btn btn--outline btn--small" href="https://www.twitch.tv/Wonffein/schedule" target="_blank" rel="noopener noreferrer">See this week's schedule</a>
-            <a class="schedule__link" href="https://twitch.tv/Wonffein" target="_blank" rel="noopener noreferrer">twitch.tv/Wonffein</a>
+          <div class="live-card" id="stream">
+            <!-- Cámara del escenario: js/stream-status.js la enciende (REC) o la apaga según el aviso del reproductor de Twitch -->
+            <span class="live-card__status" role="status" aria-live="polite">
+              <svg class="live-card__cam" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="6" width="13" height="12" rx="2.5" fill="currentColor"/>
+                <path d="M16.5 10.2 22 6.8v10.4l-5.5-3.4z" fill="currentColor"/>
+                <path class="live-card__cam-slash" d="M3.5 3.5l17 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+              <span class="live-card__status-dot" aria-hidden="true"></span>
+              <span class="live-card__status-text">Camera off</span>
+            </span>
+            <h3 class="live-card__title">Am I live?</h3>
+            <p class="live-card__text">Welcome to my stream! Grab a seat, say hi, and stay a while.</p>
+            <div class="stream-embed">
+              <!-- js/stream-status.js reemplaza este iframe por el reproductor oficial (Twitch.Player); si algo falla, se queda este -->
+              <div class="stream-embed__player" id="twitch-player">
+                <iframe
+                  src="https://player.twitch.tv/?channel=wonffein&amp;parent=nezash.github.io&amp;parent=localhost&amp;muted=true"
+                  allowfullscreen
+                  loading="lazy"
+                  title="Wonffein's Twitch stream"
+                ></iframe>
+              </div>
+              <span class="stream-embed__scan" aria-hidden="true"></span>
+              <span class="stream-embed__frame" aria-hidden="true"></span>
+            </div>
+
+            <!-- Won no tiene horario fijo: transmite casi a diario a horas distintas. Solo se da la información básica para seguirla. -->
+            <div class="live-card__follow">
+              <span class="live-card__mini" aria-hidden="true"><img src="assets/img/avatar-wave.png" alt=""></span>
+              <div class="live-card__follow-text">
+                <h4 class="live-card__subtitle">Come hang out</h4>
+                <p class="live-card__chat">There's no fixed schedule: I stream most days, at different hours. Follow me on Twitch and you'll get a notification when I go live.</p>
+              </div>
+              <a class="live-follow" href="https://twitch.tv/Wonffein" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-twitch"/></svg><span>Follow on Twitch</span></a>
+            </div>
           </div>
         </div>
       </div>
@@ -530,7 +559,7 @@
               </button>
             </h3>
             <div class="accordion-item__panel" id="faq-panel-0" role="region" aria-labelledby="faq-tab-0" aria-hidden="true">
-              <div class="accordion-item__panel-inner"><p>Anywhere from 3 days to 2 months, depending on order and complexity. If it's running slower than expected, Won will reach out right away.</p></div>
+              <div class="accordion-item__panel-inner"><p>Anywhere from 3 days to 2 months, depending on order and complexity. If it's running slower than expected, I'll reach out right away.</p></div>
             </div>
           </div>
 
@@ -566,7 +595,7 @@
               </button>
             </h3>
             <div class="accordion-item__panel" id="faq-panel-3" role="region" aria-labelledby="faq-tab-3" aria-hidden="true">
-              <div class="accordion-item__panel-inner"><p>Yes — a piece that Won can't post publicly costs an extra 50% of the base price.</p></div>
+              <div class="accordion-item__panel-inner"><p>Yes — a piece that I can't post publicly costs an extra 50% of the base price.</p></div>
             </div>
           </div>
 
@@ -662,12 +691,12 @@
               <ul>
                 <li>You must be 18 or older to commission NSFW/+18 work. Everything else is minor-friendly.</li>
                 <li>Commissions are generally first come, first served.</li>
-                <li>The process can take anywhere from five days to one–two months, depending on order and complexity. If it's running slower than expected, Won will reach out right away.</li>
-                <li>Private commissions that can't be posted by Won include a fee of 50% of the base price.</li>
+                <li>The process can take anywhere from five days to one–two months, depending on order and complexity. If it's running slower than expected, I'll reach out right away.</li>
+                <li>Private commissions that can't be posted by me include a fee of 50% of the base price.</li>
                 <li>.PSD (source) files are available at 45% of the base price.</li>
                 <li>Edits made by others are allowed with the client's approval.</li>
                 <li>Please don't commission if you're at financial risk — repeated immediate refund requests will result in being blacklisted.</li>
-                <li>Won has the right to reject any order she's not comfortable drawing, for any reason.</li>
+                <li>I have the right to reject any order I'm not comfortable drawing, for any reason.</li>
               </ul>
             </div>
           </div>
@@ -703,13 +732,13 @@
             <div class="accordion-item__panel-inner">
               <ul>
                 <li>Starts with a sketch of the main idea.</li>
-                <li>Illustrations are usually 2000×2000px at 300dpi by default — let Won know if you want a different size or resolution.</li>
+                <li>Illustrations are usually 2000×2000px at 300dpi by default — let me know if you want a different size or resolution.</li>
                 <li>You'll get a watermarked sketch first, for your approval.</li>
-                <li>Once the sketch is approved, you'll get constant WIPs through whichever platform you contacted her on.</li>
+                <li>Once the sketch is approved, you'll get constant WIPs through whichever platform you contacted me on.</li>
                 <li>Design, pose and expression need to be locked in before payment — a change of mind after a full sketch costs 20% of the total price for a new one.</li>
                 <li>5 free revisions included, with screenshots at each step so you can point out what needs changing.</li>
                 <li>Changes beyond the sketch stage cost $5–$30 depending on complexity.</li>
-                <li>Mistakes on Won's part (design or anatomy) are fixed free of charge.</li>
+                <li>Mistakes on my part (design or anatomy) are fixed free of charge.</li>
               </ul>
             </div>
           </div>
@@ -747,9 +776,9 @@
                 <li>Commercial usage means commissioned art used for merch or any direct profit. Stream-related use is generally fine.</li>
                 <li>As the client, you fully own the image you bought for personal use.</li>
                 <li>Please credit @Wonffein (all socials) when using commissioned work.</li>
-                <li>Unless otherwise agreed, Won retains the right to publish and use the commissioned piece (portfolio, promo, making-of, etc.) — with your permission, your social handle can be credited too, unless an NDA was paid for.</li>
-                <li>Profiting from Won's work without a mutual agreement is prohibited and illegal.</li>
-                <li>Using Won's personal, commissioned, existing, Patreon-exclusive or merch designs for crypto assets or AI is strictly prohibited.</li>
+                <li>Unless otherwise agreed, I retain the right to publish and use the commissioned piece (portfolio, promo, making-of, etc.) — with your permission, your social handle can be credited too, unless an NDA was paid for.</li>
+                <li>Profiting from my work without a mutual agreement is prohibited and illegal.</li>
+                <li>Using my personal, commissioned, existing, Patreon-exclusive or merch designs for crypto assets or AI is strictly prohibited.</li>
                 <li>Tracing or editing commissioned work isn't permitted.</li>
               </ul>
             </div>
@@ -780,15 +809,44 @@
   <section id="contact" class="section section--white reveal">
     <div class="container">
       <div class="contact-card">
-        <figure class="art-slot art-slot--filled contact-card__art" data-slot="3">
-          <img src="assets/img/banner-love.png" alt="Illustration of Won with a big heart" loading="lazy">
-        </figure>
-        <div>
-          <h2 class="section-title">Ready to commission?</h2>
-          <p class="contact-card__text">The safest way is VGen. If you have questions first, say hi on Discord — she replies fastest there.</p>
+        <span class="contact-card__hearts" aria-hidden="true">
+          <i style="--x:6%;--s:18px;--d:11s;--w:-4.4s;--dx:14px"></i>
+          <i style="--x:16%;--s:26px;--d:11s;--w:-4.6s;--dx:-24px"></i>
+          <i style="--x:27%;--s:26px;--d:9s;--w:-4.4s;--dx:-12px"></i>
+          <i style="--x:38%;--s:26px;--d:11s;--w:-6.7s;--dx:26px"></i>
+          <i style="--x:52%;--s:26px;--d:11s;--w:-6.9s;--dx:-12px"></i>
+          <i style="--x:63%;--s:18px;--d:11s;--w:-3.1s;--dx:-24px"></i>
+          <i style="--x:74%;--s:14px;--d:7s;--w:-6.1s;--dx:-24px"></i>
+          <i style="--x:84%;--s:22px;--d:7s;--w:-6.6s;--dx:14px"></i>
+          <i style="--x:93%;--s:26px;--d:11s;--w:-5.8s;--dx:26px"></i>
+        </span>
+
+        <div class="contact-card__art-wrap">
+          <figure class="art-slot art-slot--filled contact-card__art" data-slot="3">
+            <img src="assets/img/banner-love.png" alt="Me with a big heart" loading="lazy">
+          </figure>
+          <span class="contact-card__stamp" aria-hidden="true">Order<br>here!</span>
+        </div>
+
+        <div class="contact-card__body">
+          <h2 class="section-title contact-card__title">Ready to <span>commission?</span></h2>
+
+          <!-- Se lee de un vistazo: tres pasos cortos y un botón enorme -->
+          <ol class="contact-card__steps">
+            <li><span>1</span>Pick a style</li>
+            <li><span>2</span>Tell me your idea</li>
+            <li><span>3</span>Get your art</li>
+          </ol>
+
+          <a class="contact-cta" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer">
+            <svg class="contact-cta__icon" aria-hidden="true"><use href="#icon-vgen"/></svg>
+            <span class="contact-cta__text">Request on VGen</span>
+            <svg class="contact-cta__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+
+          <p class="contact-card__text">The safest way is VGen. If you have questions first, say hi on Discord — I reply fastest there.</p>
           <div class="contact-card__actions">
-            <a class="btn btn--primary" href="https://vgen.co/Wonffein" target="_blank" rel="noopener noreferrer">Request on VGen</a>
-            <button type="button" class="btn btn--outline copy-handle" data-copy="wonffein">
+            <button type="button" class="btn btn--outline btn--small copy-handle" data-copy="wonffein">
               <span class="copy-handle__text">Discord: wonffein</span>
               <span class="copy-handle__icon" aria-hidden="true">⧉</span>
             </button>
@@ -824,7 +882,7 @@
       <a class="social-slot" href="https://bsky.app/profile/wonffein.bsky.social" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-bluesky"/></svg><span class="visually-hidden">Bluesky</span></a>
     </nav>
 
-    <p class="footer-inner__credit">&copy; <span id="year"></span> Wonffein · All art made by Won</p>
+    <p class="footer-inner__credit">&copy; <span id="year"></span> Wonffein · All art made by me</p>
   </div>
 </footer>
 
@@ -837,5 +895,6 @@
 <script src="js/copy-handle.js"></script>
 <script src="js/recent-work-data.js"></script>
 <script src="js/recent-work.js"></script>
+<script src="js/stream-status.js"></script>
 </body>
 </html>

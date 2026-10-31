@@ -20,6 +20,7 @@
   --lilac: #a888f0;
   --lilac-dark: #c9acff;
   --line: #43296f;
+  --scrim: rgba(22, 11, 40, 0.4); /* velo oscuro sobre el fondo de pantalla, para que se lean los textos */
   --night: #24143a;
   --night-2: #3c2270;
   --night-3: #5b2fa3;

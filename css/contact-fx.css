@@ -1,0 +1,211 @@
+/* Efectos de la tarjeta de contacto: borde rosado que fluye, corazones que suben, sello que late, dibujo que flota,
+   botón con color en movimiento, destello y flecha que invita a hacer clic. Con "reducir movimiento" todo se queda quieto. */
+
+/* ---- Tarjeta: fondo cálido morado → rosa y borde de colores que se desliza ---- */
+.contact-card {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(135deg, #3b1d68 0%, #55236f 55%, #7a2a78 100%) padding-box,
+    linear-gradient(100deg, #8a52e8, #ff4fa3, #ffb3dc, #ff4fa3, #8a52e8) border-box;
+  background-size: auto, 300% 100%;
+  animation:
+    contact-border 6s linear infinite,
+    contact-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes contact-border {
+  to {
+    background-position: 0 0, -300% 0;
+  }
+}
+
+@keyframes contact-glow {
+  from {
+    box-shadow: 0 0 22px 2px rgba(138, 82, 232, 0.4), 0 20px 50px rgba(15, 7, 32, 0.45);
+  }
+
+  to {
+    box-shadow: 0 0 34px 4px rgba(255, 79, 163, 0.45), 0 20px 50px rgba(15, 7, 32, 0.45);
+  }
+}
+
+/* ---- Corazones que suben por detrás (dibujados con una máscara, no son emojis) ---- */
+.contact-card__hearts {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.contact-card__hearts i {
+  position: absolute;
+  bottom: -30px;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  background: #ff8fcf;
+  opacity: 0;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 21s-7.5-4.6-9.6-9.2C.8 8.2 3 4.5 6.6 4.5c2 0 3.700 1.100 5.400 3 1.700-1.900 3.400-3 5.400-3 3.600 0 5.800 3.700 4.200 7.300C19.500 16.400 12 21 12 21z'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 21s-7.5-4.6-9.6-9.2C.8 8.2 3 4.5 6.6 4.5c2 0 3.700 1.100 5.400 3 1.700-1.900 3.400-3 5.400-3 3.600 0 5.800 3.700 4.200 7.300C19.500 16.400 12 21 12 21z'/></svg>") center / contain no-repeat;
+  animation: contact-heart var(--d) ease-in var(--w) infinite;
+}
+
+@keyframes contact-heart {
+  0% {
+    transform: translate(0, 0) scale(0.7);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: translate(var(--dx), -460px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* ---- Dibujo: inclinado, con sombra rosada, flota despacio ---- */
+.contact-card__art-wrap {
+  transform: rotate(-3deg);
+  animation: contact-float 5s ease-in-out infinite alternate;
+}
+
+.contact-card__art {
+  box-shadow: 0 14px 34px rgba(15, 7, 32, 0.55), 0 0 0 4px rgba(255, 79, 163, 0.5);
+}
+
+@keyframes contact-float {
+  from {
+    transform: rotate(-3deg) translateY(0);
+  }
+
+  to {
+    transform: rotate(-1.5deg) translateY(-10px);
+  }
+}
+
+/* ---- Sello "Order here!": rosado fuerte con borde punteado, late ---- */
+.contact-card__stamp {
+  background: radial-gradient(circle at 35% 30%, #ff8fcf, #ff3f9a 70%);
+  box-shadow: 0 8px 22px rgba(255, 63, 154, 0.55), inset 0 0 0 5px rgba(255, 255, 255, 0.9), inset 0 0 0 8px #ff3f9a;
+  text-shadow: 0 2px 0 rgba(120, 10, 70, 0.55);
+  rotate: 12deg;
+  animation: contact-stamp 1.8s ease-in-out infinite;
+}
+
+@keyframes contact-stamp {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ---- Pasos ---- */
+.contact-card__steps li {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 179, 220, 0.4);
+}
+
+.contact-card__steps li span {
+  background: linear-gradient(135deg, #ff8fcf, #b45cff);
+  color: #2a0f45;
+}
+
+/* ---- Botón enorme: color que fluye de rosa a violeta, destello, halo que late y flecha que empuja ---- */
+.contact-cta {
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(100deg, #ff3f9a, #ff7ac6, #b45cff, #ff7ac6, #ff3f9a);
+  background-size: 300% 100%;
+  text-shadow: 0 2px 8px rgba(80, 10, 70, 0.5);
+  animation:
+    contact-cta-flow 4s linear infinite,
+    contact-cta-pulse 1.6s ease-in-out infinite alternate;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.contact-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 35%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: translateX(-170%) skewX(-18deg);
+  animation: contact-cta-shine 6s ease-in-out infinite;
+}
+
+.contact-cta__arrow {
+  animation: contact-arrow 1s ease-in-out infinite alternate;
+}
+
+.contact-cta:hover,
+.contact-cta:focus-visible {
+  transform: translateY(-4px) scale(1.04);
+  filter: brightness(1.12) saturate(1.1);
+  color: #fff;
+}
+
+.contact-cta:hover .contact-cta__arrow {
+  animation-duration: 0.35s;
+}
+
+@keyframes contact-cta-flow {
+  to {
+    background-position: -300% 0;
+  }
+}
+
+@keyframes contact-cta-pulse {
+  from {
+    box-shadow: 0 0 14px rgba(255, 63, 154, 0.55), 0 10px 26px rgba(15, 7, 32, 0.4);
+  }
+
+  to {
+    box-shadow: 0 0 34px rgba(255, 122, 198, 0.85), 0 12px 32px rgba(15, 7, 32, 0.45);
+  }
+}
+
+@keyframes contact-cta-shine {
+  0%,
+  50% {
+    transform: translateX(-170%) skewX(-18deg);
+  }
+
+  100% {
+    transform: translateX(420%) skewX(-18deg);
+  }
+}
+
+@keyframes contact-arrow {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-card,
+  .contact-card__art-wrap,
+  .contact-card__stamp,
+  .contact-cta,
+  .contact-cta::after,
+  .contact-cta__arrow {
+    animation: none;
+  }
+
+  .contact-card__hearts {
+    display: none;
+  }
+}

@@ -1,0 +1,386 @@
+/* Efectos del escenario de Twitch: borde de fuego, cuernos, chispas, brillos del título y del botón, marco del monitor.
+   Todo es decoración; con "reducir movimiento" se queda quieto. */
+
+/* ---- Tarjeta: borde de llama morado y rosado que sube sin parar + halo que respira ---- */
+.live-card {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(0deg, #6d33c9 0%, #a24dff 22%, #ff4fa3 48%, #ff9ad0 62%, #c255ff 82%, #6d33c9 100%) border-box;
+  background-size: auto, 100% 260px;
+  background-repeat: no-repeat, repeat-y;
+  animation:
+    stage-flame 3s linear infinite,
+    stage-glow 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes stage-flame {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 0 0, 0 -260px;
+  }
+}
+
+@keyframes stage-glow {
+  0% {
+    box-shadow: 0 0 16px 1px rgba(162, 77, 255, 0.5), 0 0 44px 4px rgba(109, 51, 201, 0.35);
+  }
+
+  100% {
+    box-shadow: 0 0 20px 2px rgba(255, 79, 163, 0.5), 0 0 52px 6px rgba(194, 85, 255, 0.3);
+  }
+}
+
+/* ---- Cuernos: asoman por detrás de la card (el PNG es negro, se vuelve lila claro como en la portada) ---- */
+.live-stage__horns {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  z-index: 0;
+  width: min(560px, 82%);
+  max-width: none;
+  height: auto;
+  translate: -50% 0;
+  pointer-events: none;
+  filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(190, 150, 255, 0.6));
+  opacity: 0.42;
+  animation: stage-horns 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes stage-horns {
+  from {
+    opacity: 0.32;
+  }
+
+  to {
+    opacity: 0.55;
+  }
+}
+
+/* ---- Chispas que suben por detrás de la card (se ven por los lados y por arriba) ---- */
+.live-stage__embers {
+  position: absolute;
+  inset: -520px 0 0; /* sube hacia arriba de la card; el recorte evita que ensanchen la página en el celular */
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.live-stage__embers i {
+  position: absolute;
+  bottom: 0;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #ffd3ec;
+  box-shadow: 0 0 10px 2px rgba(255, 120, 190, 0.7);
+  opacity: 0;
+  animation: stage-ember var(--d) linear var(--w) infinite;
+}
+
+@keyframes stage-ember {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  75% {
+    opacity: 0.45;
+  }
+
+  100% {
+    transform: translate(var(--dx), -520px);
+    opacity: 0;
+  }
+}
+
+/* ---- Título: degradado blanco → lila → rosa con un brillo que late ---- */
+.live-card__title {
+  background: linear-gradient(180deg, #ffffff 10%, #e6ccff 50%, #ff8fcf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: stage-title 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes stage-title {
+  from {
+    filter: drop-shadow(0 0 6px rgba(194, 85, 255, 0.55));
+  }
+
+  to {
+    filter: drop-shadow(0 0 16px rgba(255, 79, 163, 0.75));
+  }
+}
+
+/* ---- Monitor: líneas de pantalla sutiles + barra que baja despacio + marco con esquinas que pulsan ---- */
+.stream-embed {
+  box-shadow: 0 0 0 2px rgba(162, 77, 255, 0.6), 0 0 30px rgba(194, 85, 255, 0.35);
+}
+
+.stream-embed__scan {
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.07), transparent) 0 -30% / 100% 28% no-repeat,
+    repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.1) 2px 3px);
+  animation: stage-scan 6s linear infinite;
+}
+
+@keyframes stage-scan {
+  from {
+    background-position: 0 -30%, 0 0;
+  }
+
+  to {
+    background-position: 0 130%, 0 0;
+  }
+}
+
+.stream-embed__frame {
+  z-index: 2;
+  inset: 12px;
+  --c: #ff8fcf;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 28px 3px no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / 3px 28px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 28px 3px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 3px 28px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 28px 3px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 3px 28px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 28px 3px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 3px 28px no-repeat;
+  filter: drop-shadow(0 0 5px rgba(255, 79, 163, 0.8));
+  animation: stage-corners 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes stage-corners {
+  from {
+    opacity: 0.45;
+    inset: 12px;
+  }
+
+  to {
+    opacity: 1;
+    inset: 8px;
+  }
+}
+
+/* ---- Cámara: apagada (gris, tachada) o encendida (REC rojo que pulsa; esquinas y halo del monitor se ponen rojos) ---- */
+.live-card__cam-slash {
+  display: none;
+}
+
+.live-stage[data-live="off"] .live-card__cam-slash {
+  display: inline;
+}
+
+.live-stage[data-live="off"] .live-card__status {
+  color: #a995c9;
+  border-color: rgba(169, 149, 201, 0.35);
+}
+
+.live-stage[data-live="checking"] .live-card__status-dot {
+  animation: stage-check 1s ease-in-out infinite alternate;
+}
+
+@keyframes stage-check {
+  from {
+    opacity: 0.25;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.live-stage[data-live="live"] .live-card__status {
+  color: #fff;
+  border-color: rgba(255, 59, 92, 0.8);
+  background: rgba(255, 59, 92, 0.2);
+  box-shadow: 0 0 16px rgba(255, 59, 92, 0.55);
+}
+
+.live-stage[data-live="live"] .live-card__cam {
+  color: #ff5a78;
+  filter: drop-shadow(0 0 5px rgba(255, 59, 92, 0.9));
+}
+
+.live-stage[data-live="live"] .live-card__status-dot {
+  background: #ff3b5c;
+  box-shadow: 0 0 0 0 rgba(255, 59, 92, 0.8);
+  animation: stage-rec 1.2s ease-out infinite;
+}
+
+@keyframes stage-rec {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 92, 0.85);
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 0.55;
+  }
+
+  100% {
+    box-shadow: 0 0 0 9px rgba(255, 59, 92, 0);
+    opacity: 1;
+  }
+}
+
+.live-stage[data-live="live"] .stream-embed {
+  box-shadow: 0 0 0 2px rgba(255, 59, 92, 0.7), 0 0 34px rgba(255, 59, 92, 0.4);
+}
+
+.live-stage[data-live="live"] .stream-embed__frame {
+  --c: #ff3b5c;
+  filter: drop-shadow(0 0 5px rgba(255, 59, 92, 0.9));
+}
+
+/* ---- Avatar chico con anillo de colores que gira ---- */
+.live-card__mini::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #6d33c9, #ff4fa3, #ffd3ec, #a24dff, #6d33c9);
+  animation: stage-spin 4s linear infinite;
+}
+
+@keyframes stage-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Botón "Follow on Twitch": color que fluye, destello que lo cruza, halo que late; al pasar el mouse sube y se enciende ---- */
+.live-follow {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(100deg, #7a3dd8, #b24dff, #ff4fa3, #b24dff, #7a3dd8);
+  background-size: 300% 100%;
+  text-shadow: 0 1px 6px rgba(40, 10, 70, 0.55);
+  animation:
+    stage-follow-flow 5s linear infinite,
+    stage-follow-pulse 1.8s ease-in-out infinite alternate;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.live-follow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 40%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: translateX(-160%) skewX(-18deg);
+  animation: stage-follow-shine 3.4s ease-in-out infinite;
+}
+
+.live-follow:hover,
+.live-follow:focus-visible {
+  transform: translateY(-3px) scale(1.06);
+  filter: brightness(1.18) saturate(1.15);
+  animation-duration: 1.6s, 0.9s;
+  color: #fff;
+}
+
+.live-follow:hover svg {
+  animation: stage-wiggle 0.5s ease-in-out;
+}
+
+@keyframes stage-follow-flow {
+  to {
+    background-position: -300% 0;
+  }
+}
+
+@keyframes stage-follow-pulse {
+  from {
+    box-shadow: 0 0 10px rgba(162, 77, 255, 0.55), 0 6px 18px rgba(122, 61, 200, 0.35);
+  }
+
+  to {
+    box-shadow: 0 0 24px rgba(255, 79, 163, 0.75), 0 8px 24px rgba(194, 85, 255, 0.45);
+  }
+}
+
+@keyframes stage-follow-shine {
+  0%,
+  55% {
+    transform: translateX(-160%) skewX(-18deg);
+  }
+
+  100% {
+    transform: translateX(380%) skewX(-18deg);
+  }
+}
+
+@keyframes stage-wiggle {
+  25% {
+    transform: rotate(-14deg);
+  }
+
+  75% {
+    transform: rotate(14deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .live-stage__horns {
+    top: -78px;
+    width: 86%;
+  }
+
+  .live-stage__embers i {
+    animation-name: stage-ember-short;
+  }
+
+  @keyframes stage-ember-short {
+    0% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+
+    12% {
+      opacity: 0.9;
+    }
+
+    100% {
+      transform: translate(var(--dx), -380px);
+      opacity: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-card,
+  .live-stage__horns,
+  .live-card__title,
+  .stream-embed__scan,
+  .stream-embed__frame,
+  .live-card__mini::before,
+  .live-card__status-dot,
+  .live-follow,
+  .live-follow::after,
+  .live-follow:hover svg {
+    animation: none;
+  }
+
+  .live-stage__embers {
+    display: none;
+  }
+
+  .live-card {
+    box-shadow: 0 0 22px 2px rgba(194, 85, 255, 0.4);
+  }
+}

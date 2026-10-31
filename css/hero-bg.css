@@ -15,9 +15,11 @@
 /* El PNG es negro con fondo transparente: brightness(0) + invert(1) lo vuelve blanco y la opacidad lo deja lila sobre el morado. */
 .hero__horns {
   position: absolute;
-  left: -19%;
-  top: -32.1%;
-  width: 138%;
+  /* El PNG mide 1036x740. Medidas calculadas para que las bases de los cuernos queden detrás de la parte de arriba del círculo
+     y las puntas suban encima de la cabeza (porcentajes del círculo de Won). Se ve la mitad de arriba de los cuernos; la de abajo queda tapada por la cabeza. */
+  left: 11%;
+  top: -25%;
+  width: 78%;
   height: auto;
   max-width: none;
   pointer-events: none;
@@ -77,6 +79,11 @@
   }
 }
 
+/* --rise: cuánto suben las chispas (el hero mide ~810px en escritorio y ~1190px en celular) */
+.hero__embers {
+  --rise: 580px;
+}
+
 .hero__embers i {
   position: absolute;
   bottom: -12px;
@@ -105,13 +112,14 @@
   }
 
   100% {
-    transform: translate(var(--dx), -620px);
+    transform: translate(var(--dx), calc(var(--rise) * -1));
     opacity: 0;
   }
 }
 
-/* El borde de abajo se funde con el fondo oscuro de la siguiente sección */
+/* No se usa: la portada termina con un corte limpio y debajo empieza el fondo de pantalla */
 .hero__fade {
+  display: none;
   position: absolute;
   inset: auto 0 0 0;
   height: 140px;
@@ -120,14 +128,11 @@
 
 @media (max-width: 900px) {
   .hero {
-    padding-top: 120px;
+    padding-top: 104px;
   }
 
-  /* en celular los cuernos no pueden salirse de la pantalla */
-  .hero__horns {
-    left: -9%;
-    top: -20.2%;
-    width: 118%;
+  .hero__embers {
+    --rise: 1080px;
   }
 }
 

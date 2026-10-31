@@ -19,7 +19,7 @@
 
     var img = document.createElement("img");
     img.src = item.img;
-    img.alt = item.alt || "A recent commission made by Won";
+    img.alt = item.alt || "A recent commission I made";
     img.loading = "lazy";
     img.referrerPolicy = "no-referrer"; // algunos servidores de imágenes rechazan pedidos con referer de otro sitio
 

@@ -17,7 +17,7 @@ Pagina Won Nueva/
 │   ├── button.css  chip.css  art-slot.css  social.css
 │   ├── header.css  hero.css  gallery.css  lightbox.css
 │   ├── services.css  recent-work.css  process.css
-│   ├── about.css  stream.css  schedule.css
+│   ├── about.css  stream.css  stream-fx.css  section-title.css  contact-fx.css
 │   ├── accordion.css  faq.css  terms.css
 │   └── contact.css  footer.css  reveal.css
 ├── js/                   (un archivo por función)
@@ -35,7 +35,7 @@ Pagina Won Nueva/
 2. Galería con filtros (`#gallery`)
 3. Comisiones: 3 tarjetas con dibujo de ejemplo + tira "Made for lovely clients" (`#commissions`)
 4. Cómo funciona: 4 pasos (`#process`)
-5. Sobre Won + stream en vivo + horario (`#about`). El horario no tiene horas fijas: Won transmite casi a diario a horas distintas, así que se muestran los 7 días y un enlace al horario de Twitch
+5. Sobre Won + stream en vivo (`#about`). Una sola tarjeta "escenario infernal": reproductor de Twitch con marco de monitor, y abajo "Come hang out" con el botón de seguir (Won no tiene horario fijo, así que no se muestran horas). Letras propias del bloque: Pirata One, Bungee y VT323 (ya incluidas en el enlace de Google Fonts). Efectos en `css/stream-fx.css`: borde de fuego, cuernos, chispas, brillo del título y del botón; todo se detiene con "reducir movimiento". La etiqueta de cámara (REC / Camera off) la maneja `js/stream-status.js`: carga el reproductor oficial de Twitch (`Twitch.Player`, sin claves ni servidor) y escucha sus eventos ONLINE/OFFLINE; abierto como archivo (`file://`) o si Twitch no responde, la etiqueta se oculta
 6. Dudas frecuentes (`#faq`)
 7. Términos de servicio completos, en filas que se abren (`#terms`)
 8. Contacto (`#contact`)
@@ -93,3 +93,16 @@ Las imágenes de las 3 comisiones de ejemplo (#11–13) son copias de 1000 px de
 - Selector de idioma EN/ES (el sitio está en inglés).
 - Si se pasa a dominio propio: sumar otro `&parent=` en el embed de Twitch (`index.html`, sección `#stream`).
 - Las descripciones cortas de cada servicio ("A cute chibi for your avatar…") y los textos de "Cómo funciona" son redacción nueva; los precios, listas y términos son los reales de VGen.
+
+## Títulos con estilo propio
+- **Hero** (`css/hero.css`): letra Ceviche One (trazo de pincel) con degradado rosa fuerte a violeta y destello que lo cruza. Es único.
+- **Stream** (`css/stream.css` / `css/stream-fx.css`): Pirata One gótica con degradado blanco a rosa. Es único.
+- **Resto de secciones** (`css/section-title.css`): todas igual — letra Gloock, degradado blanco rosado → rosa → violeta que se desliza, brillo suave y raya que crece. Sin azules, para que combine con el fondo morado. Para cambiar el color de todas, editar `--t1`, `--t2` y `--t3` al inicio de ese archivo.
+
+## Tarjeta de contacto (cierre)
+Pensada para entenderse sin leer: dibujo grande inclinado con sello "Order here!", tres pasos cortos y un botón enorme a VGen con color que fluye, destello y flecha que empuja. El Discord queda como botón chico de copiar. Forma en `css/contact.css`, colores y animaciones en `css/contact-fx.css`.
+El título "Ready to commission?" es la excepción: letra Outfit (sans firme), con un solo degradado rosa claro → rosa fuerte → violeta en todo el título y sin raya.
+
+## Filas que se abren (FAQ y términos)
+`css/accordion.css`: halo lila suave en la fila abierta y el ícono "+" que da media vuelta y pasa a degradado rosa → violeta. Sin movimiento constante.
+

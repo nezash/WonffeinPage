@@ -1,13 +1,20 @@
-/* Aparición suave de las secciones al hacer scroll (class="reveal"; js/reveal.js agrega is-visible).
+/* Aparición suave del CONTENIDO de cada sección al hacer scroll (class="reveal"; js/reveal.js agrega is-visible).
+   El fondo de la sección nunca se anima: queda fijo y solo aparece el contenido de adentro.
    Si el navegador no tiene JS, el contenido se ve igual (solo se oculta cuando <html> tiene .js). */
 
-.js .reveal {
+.js .reveal,
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal > .container {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.js .reveal.is-visible {
+.js .reveal.is-visible > .container {
   opacity: 1;
   transform: none;
 }

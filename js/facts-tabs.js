@@ -1,4 +1,4 @@
-// Sección "About": pestañas chicas (Who is she? / The goal / ...). Al elegir otra, el texto
+// Sección "About": pestañas chicas (Who am I? / The goal / ...). Al elegir otra, el texto
 // activo se desvanece ("summon-out"), se hace el swap a mitad de la animación y el nuevo
 // aparece ("summon-in"). LEAVE_MS tiene que coincidir con @keyframes summon-out en about.css (.25s).
 

@@ -68,7 +68,7 @@ def main():
         entries.append({
             "img": "assets/recent/" + dest.name,
             "url": "https://vgen.co/portfolio/" + sid,
-            "alt": "Commission by Won: " + item.get("title", "").strip(),
+            "alt": "Commission I made: " + item.get("title", "").strip(),
         })
 
     for old in IMG_DIR.glob("*.webp"):
