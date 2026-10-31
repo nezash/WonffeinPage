@@ -2,8 +2,9 @@
 """Trae las 4 comisiones más recientes del portafolio público de Won en VGen.
 
 - Pide la lista a la API pública de VGen (la misma que usa vgen.co/Wonffein/portfolio).
-- Se queda con las que son comisiones, tienen imagen verificada y no traen advertencias de contenido,
-  ordenadas de la más nueva a la más vieja (campo "created").
+- Se queda con las que son comisiones, tienen imagen verificada y no traen advertencias de contenido
+  (salvo "revealing", que se permite: escote o ropa atrevida, nada explícito), ordenadas de la más nueva
+  a la más vieja (campo "created").
 - Descarga cada imagen a assets/recent/ (la página no depende de que VGen deje enlazar sus imágenes).
 - Escribe js/recent-work-data.js, que es lo que lee la tira "Made for lovely clients".
 
@@ -23,6 +24,8 @@ API = (
     + "?verifyAge=true&isDraftExcluded=true&showOnlyCommissions=true&limit=20"
 )
 HOW_MANY = 4
+# Advertencias de VGen que NO bloquean una pieza. Cualquier otra advertencia en verdadero la deja fuera de la página.
+ALLOWED_WARNINGS = {"revealing"}
 ROOT = Path(__file__).resolve().parent.parent
 IMG_DIR = ROOT / "assets" / "recent"
 DATA_FILE = ROOT / "js" / "recent-work-data.js"
@@ -43,8 +46,9 @@ def main():
     for item in sorted(showcases, key=lambda s: s.get("created", ""), reverse=True):
         if not item.get("commissionID"):
             continue
-        if any((item.get("contentWarnings") or {}).values()):
-            continue  # la página es para todo público: se saltan las piezas marcadas
+        warnings = item.get("contentWarnings") or {}
+        if any(on for name, on in warnings.items() if on and name not in ALLOWED_WARNINGS):
+            continue  # se saltan las piezas con otras advertencias (todo lo que no sea "revealing")
         images = [i for i in item.get("showcaseItems", []) if i.get("type") == "IMAGE" and i.get("isVerified")]
         if not images or not item.get("showcaseID"):
             continue
